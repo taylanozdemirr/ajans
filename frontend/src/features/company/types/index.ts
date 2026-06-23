@@ -9,7 +9,7 @@ export interface Model {
   age: number;
   city: string;
   whatsappPhone: string;
-  photoUrl: string | null;
+  photos: { id: string; url: string }[];
 }
 
 export const createModelSchema = z.object({

@@ -37,8 +37,8 @@ export const handlers = [
         age: 22,
         city: 'Istanbul',
         whatsappPhone: '905550001122',
-        photoUrl: null,
-        company: { name: 'Mock Ajans' }
+        photos: [{ id: 'p1', url: '/uploads/model_2.png' }],
+        company: { id: 'c1', name: 'Mock Ajans' }
       },
       {
         id: 'm2',
@@ -49,8 +49,8 @@ export const handlers = [
         age: 24,
         city: 'Izmir',
         whatsappPhone: '905550001133',
-        photoUrl: null,
-        company: { name: 'VIP Models' }
+        photos: [{ id: 'p2', url: '/uploads/model_3.png' }],
+        company: { id: 'c2', name: 'VIP Models' }
       }
     ];
 

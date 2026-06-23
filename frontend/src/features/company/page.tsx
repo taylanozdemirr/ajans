@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { LogOut, Plus, Trash2, Users, AlertCircle } from 'lucide-react';
+import { LogOut, Plus, Trash2, Users, AlertCircle, ImagePlus, User, Ruler, MapPin, Phone } from 'lucide-react';
 
 import { useAuthStore } from '../../store/authStore';
 import api from '../../api/axios';
@@ -58,8 +58,10 @@ export default function CompanyPage() {
         formData.append(key, String(value));
       });
       
-      if (fileInputRef.current?.files?.[0]) {
-        formData.append('photo', fileInputRef.current.files[0]);
+      if (fileInputRef.current?.files?.length) {
+        Array.from(fileInputRef.current.files).forEach(file => {
+          formData.append('photos', file);
+        });
       }
 
       await api.post('/company/models', formData, {
@@ -100,12 +102,12 @@ export default function CompanyPage() {
   return (
     <>
       <Helmet>
-        <title>Ajans Paneli | LUXE AGENCY</title>
+        <title>Ajans Paneli | TMÖ AGENCY</title>
       </Helmet>
       <div className="min-h-screen bg-background flex">
         <aside className="w-64 border-r bg-card flex flex-col hidden md:flex">
           <div className="p-6 border-b">
-            <h2 className="text-2xl font-bold tracking-tight text-primary">LUXE <span className="text-foreground">AGENCY</span></h2>
+            <h2 className="text-2xl font-bold tracking-tight text-primary">TMÖ <span className="text-foreground">AGENCY</span></h2>
           </div>
           <nav className="flex-1 p-4 space-y-2">
             <Button variant="secondary" className="w-full justify-start font-medium">Mankenlerim</Button>
@@ -128,7 +130,7 @@ export default function CompanyPage() {
 
         <main className="flex-1 flex flex-col h-screen overflow-hidden">
           <header className="h-16 border-b flex items-center justify-between px-4 md:hidden bg-card">
-            <h2 className="text-xl font-bold">LUXE AGENCY</h2>
+            <h2 className="text-xl font-bold">TMÖ AGENCY</h2>
             <Button variant="ghost" size="icon" onClick={logout}><LogOut className="w-5 h-5" /></Button>
           </header>
 
@@ -185,57 +187,85 @@ export default function CompanyPage() {
                         <DialogTitle>Yeni Manken Profili</DialogTitle>
                         <CardDescription>Lütfen mankene ait bilgileri eksiksiz doldurun.</CardDescription>
                       </DialogHeader>
-                      <form onSubmit={handleSubmit(onAddSubmit)} className="space-y-6 mt-4">
-                        <div className="space-y-2">
-                          <Label>Profil Fotoğrafı</Label>
-                          <Input type="file" accept="image/*" ref={fileInputRef} className="cursor-pointer" />
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-4">
+                      <form onSubmit={handleSubmit(onAddSubmit)} className="space-y-5 mt-4">
+                        
+                        {/* Fotoğraf Alanı */}
+                        <div className="p-4 bg-muted/30 border border-border/50 rounded-xl space-y-3">
+                          <h3 className="text-sm font-semibold flex items-center gap-2 text-primary">
+                            <ImagePlus className="w-4 h-4" /> Medya Yükleme
+                          </h3>
                           <div className="space-y-2">
-                            <Label className={errors.firstName ? 'text-destructive' : ''}>Ad</Label>
-                            <Input {...register('firstName')} className={errors.firstName ? 'border-destructive' : ''} />
-                            {errors.firstName && <p className="text-xs text-destructive">{errors.firstName.message}</p>}
-                          </div>
-                          <div className="space-y-2">
-                            <Label className={errors.lastName ? 'text-destructive' : ''}>Soyad</Label>
-                            <Input {...register('lastName')} className={errors.lastName ? 'border-destructive' : ''} />
-                            {errors.lastName && <p className="text-xs text-destructive">{errors.lastName.message}</p>}
+                            <Label>Profil Fotoğrafları (Birden fazla seçebilirsiniz)</Label>
+                            <Input type="file" accept="image/*" multiple ref={fileInputRef} className="cursor-pointer bg-background" />
                           </div>
                         </div>
 
-                        <div className="grid grid-cols-3 gap-4">
-                          <div className="space-y-2">
-                            <Label className={errors.height ? 'text-destructive' : ''}>Boy (cm)</Label>
-                            <Input type="number" {...register('height', { valueAsNumber: true })} className={errors.height ? 'border-destructive' : ''} />
-                            {errors.height && <p className="text-xs text-destructive">{errors.height.message}</p>}
-                          </div>
-                          <div className="space-y-2">
-                            <Label className={errors.weight ? 'text-destructive' : ''}>Kilo (kg)</Label>
-                            <Input type="number" {...register('weight', { valueAsNumber: true })} className={errors.weight ? 'border-destructive' : ''} />
-                            {errors.weight && <p className="text-xs text-destructive">{errors.weight.message}</p>}
-                          </div>
-                          <div className="space-y-2">
-                            <Label className={errors.age ? 'text-destructive' : ''}>Yaş</Label>
-                            <Input type="number" {...register('age', { valueAsNumber: true })} className={errors.age ? 'border-destructive' : ''} />
-                            {errors.age && <p className="text-xs text-destructive">{errors.age.message}</p>}
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-4">
-                          <div className="space-y-2">
-                            <Label className={errors.city ? 'text-destructive' : ''}>Şehir</Label>
-                            <Input {...register('city')} className={errors.city ? 'border-destructive' : ''} />
-                            {errors.city && <p className="text-xs text-destructive">{errors.city.message}</p>}
-                          </div>
-                          <div className="space-y-2">
-                            <Label className={errors.whatsappPhone ? 'text-destructive' : ''}>WhatsApp No</Label>
-                            <Input {...register('whatsappPhone')} placeholder="905551234567" className={errors.whatsappPhone ? 'border-destructive' : ''} />
-                            {errors.whatsappPhone && <p className="text-xs text-destructive">{errors.whatsappPhone.message}</p>}
+                        {/* Kişisel Bilgiler */}
+                        <div className="p-4 bg-muted/30 border border-border/50 rounded-xl space-y-4">
+                          <h3 className="text-sm font-semibold flex items-center gap-2 text-primary">
+                            <User className="w-4 h-4" /> Kişisel Bilgiler
+                          </h3>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                              <Label className={errors.firstName ? 'text-destructive' : ''}>Ad</Label>
+                              <Input {...register('firstName')} placeholder="Manken Adı" className={`bg-background ${errors.firstName ? 'border-destructive' : ''}`} />
+                              {errors.firstName && <p className="text-xs text-destructive">{errors.firstName.message}</p>}
+                            </div>
+                            <div className="space-y-2">
+                              <Label className={errors.lastName ? 'text-destructive' : ''}>Soyad</Label>
+                              <Input {...register('lastName')} placeholder="Manken Soyadı" className={`bg-background ${errors.lastName ? 'border-destructive' : ''}`} />
+                              {errors.lastName && <p className="text-xs text-destructive">{errors.lastName.message}</p>}
+                            </div>
                           </div>
                         </div>
 
-                        <Button type="submit" className="w-full" disabled={isSubmitting}>
+                        {/* Fiziksel & Konum */}
+                        <div className="p-4 bg-muted/30 border border-border/50 rounded-xl space-y-4">
+                          <h3 className="text-sm font-semibold flex items-center gap-2 text-primary">
+                            <Ruler className="w-4 h-4" /> Fiziksel Özellikler & İletişim
+                          </h3>
+                          <div className="grid grid-cols-3 gap-4">
+                            <div className="space-y-2">
+                              <Label className={errors.height ? 'text-destructive' : ''}>Boy (cm)</Label>
+                              <Input type="number" placeholder="175" {...register('height', { valueAsNumber: true })} className={`bg-background ${errors.height ? 'border-destructive' : ''}`} />
+                            </div>
+                            <div className="space-y-2">
+                              <Label className={errors.weight ? 'text-destructive' : ''}>Kilo (kg)</Label>
+                              <Input type="number" placeholder="55" {...register('weight', { valueAsNumber: true })} className={`bg-background ${errors.weight ? 'border-destructive' : ''}`} />
+                            </div>
+                            <div className="space-y-2">
+                              <Label className={errors.age ? 'text-destructive' : ''}>Yaş</Label>
+                              <Input type="number" placeholder="22" {...register('age', { valueAsNumber: true })} className={`bg-background ${errors.age ? 'border-destructive' : ''}`} />
+                            </div>
+                          </div>
+                          
+                          <div className="grid grid-cols-2 gap-4 pt-2">
+                            <div className="space-y-2">
+                              <Label className={errors.city ? 'text-destructive' : ''}><MapPin className="w-3 h-3 inline mr-1"/>Şehir</Label>
+                              <Input {...register('city')} placeholder="İstanbul" className={`bg-background ${errors.city ? 'border-destructive' : ''}`} />
+                              {errors.city && <p className="text-xs text-destructive">{errors.city.message}</p>}
+                            </div>
+                            <div className="space-y-2">
+                              <Label className={errors.whatsappPhone ? 'text-destructive' : ''}><Phone className="w-3 h-3 inline mr-1"/>WhatsApp No</Label>
+                              <Input 
+                                {...register('whatsappPhone', {
+                                  onChange: (e) => {
+                                    let val = e.target.value.replace(/[^\d]/g, '');
+                                    if (val.length > 0 && val[0] !== '0') {
+                                      val = '0' + val;
+                                    }
+                                    e.target.value = val;
+                                  }
+                                })} 
+                                placeholder="0555 123 45 67" 
+                                className={`bg-background ${errors.whatsappPhone ? 'border-destructive' : ''}`} 
+                              />
+                              {errors.whatsappPhone && <p className="text-xs text-destructive">{errors.whatsappPhone.message}</p>}
+                            </div>
+                          </div>
+                        </div>
+
+                        <Button type="submit" className="w-full font-bold h-10 shadow-md hover:shadow-lg transition-all" disabled={isSubmitting}>
                           {isSubmitting ? 'Kaydediliyor...' : 'Yayınla'}
                         </Button>
                       </form>
@@ -281,8 +311,8 @@ export default function CompanyPage() {
                           <TableRow key={model.id}>
                             <TableCell>
                               <div className="w-10 h-10 rounded-md overflow-hidden bg-muted">
-                                {model.photoUrl ? (
-                                  <img src={`http://localhost:5000${model.photoUrl}`} alt="" className="w-full h-full object-cover" />
+                                {model.photos?.[0]?.url ? (
+                                  <img src={`http://localhost:5000${model.photos[0].url}`} alt="" className="w-full h-full object-cover" />
                                 ) : (
                                   <div className="w-full h-full flex items-center justify-center text-xs text-muted-foreground">Yok</div>
                                 )}

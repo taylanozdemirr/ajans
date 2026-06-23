@@ -98,12 +98,12 @@ export default function AdminPage() {
   return (
     <>
       <Helmet>
-        <title>Admin Dashboard | LUXE AGENCY</title>
+        <title>Admin Dashboard | TMÖ AGENCY</title>
       </Helmet>
       <div className="min-h-screen bg-background flex">
         <aside className="w-64 border-r bg-card flex flex-col hidden md:flex">
           <div className="p-6 border-b">
-            <h2 className="text-2xl font-bold tracking-tight text-primary">LUXE <span className="text-foreground">ADMIN</span></h2>
+            <h2 className="text-2xl font-bold tracking-tight text-primary">TMÖ <span className="text-foreground">ADMIN</span></h2>
           </div>
           <nav className="flex-1 p-4 space-y-2">
             <Button variant="secondary" className="w-full justify-start font-medium">Firmalar</Button>
@@ -124,7 +124,7 @@ export default function AdminPage() {
 
         <main className="flex-1 flex flex-col h-screen overflow-hidden">
           <header className="h-16 border-b flex items-center justify-between px-4 md:hidden bg-card">
-            <h2 className="text-xl font-bold">LUXE ADMIN</h2>
+            <h2 className="text-xl font-bold">TMÖ ADMIN</h2>
             <Button variant="ghost" size="icon" onClick={logout}><LogOut className="w-5 h-5" /></Button>
           </header>
 

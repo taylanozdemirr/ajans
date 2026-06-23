@@ -7,8 +7,9 @@ export interface PublicModel {
   age: number;
   city: string;
   whatsappPhone: string;
-  photoUrl: string | null;
+  photos: { id: string; url: string }[];
   company: {
+    id: string;
     name: string;
   };
 }

@@ -23,7 +23,7 @@ const createModelSchema = z.object({
 router.use(authenticate);
 router.use(authorize(['COMPANY']));
 
-router.post('/models', upload.single('photo'), validate(createModelSchema), createModel);
+router.post('/models', upload.array('photos', 10), validate(createModelSchema), createModel);
 router.get('/models', getMyModels);
 router.delete('/models/:id', deleteModel);
 

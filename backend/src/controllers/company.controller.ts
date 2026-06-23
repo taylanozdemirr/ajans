@@ -10,7 +10,8 @@ export const createModel = async (req: AuthRequest, res: Response, next: any): P
   }
 
   const { firstName, lastName, height, weight, age, city, whatsappPhone } = req.body;
-  const photoUrl = req.file ? `/uploads/${req.file.filename}` : null;
+  const files = req.files as Express.Multer.File[];
+  const photosData = files ? files.map(file => ({ url: `/uploads/${file.filename}` })) : [];
 
   try {
     const company = await prisma.company.findUnique({ where: { id: companyId } });
@@ -35,7 +36,12 @@ export const createModel = async (req: AuthRequest, res: Response, next: any): P
           age: Number(age),
           city,
           whatsappPhone,
-          photoUrl
+          photos: {
+            create: photosData
+          }
+        },
+        include: {
+          photos: true
         }
       });
 
@@ -65,7 +71,8 @@ export const getMyModels = async (req: AuthRequest, res: Response, next: any): P
         where: { companyId },
         skip,
         take: limit,
-        orderBy: { createdAt: 'desc' }
+        orderBy: { createdAt: 'desc' },
+        include: { photos: true }
       }),
       prisma.model.count({ where: { companyId } })
     ]);

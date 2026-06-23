@@ -33,7 +33,6 @@ model Company {
 
 model Model {
   id            String   @id @default(uuid())
-  photoUrl      String?
   firstName     String
   lastName      String
   height        Float
@@ -46,4 +45,14 @@ model Model {
 
   company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
   companyId String
+
+  photos    ModelPhoto[]
+}
+
+model ModelPhoto {
+  id        String   @id @default(uuid())
+  url       String
+  model     Model    @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  modelId   String
+  createdAt DateTime @default(now())
 }

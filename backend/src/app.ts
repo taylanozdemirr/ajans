@@ -8,7 +8,7 @@ import { globalErrorHandler } from './middlewares/errorHandler';
 
 const app = express();
 
-app.use(cors({ origin: ['http://localhost:5173', 'http://localhost:5178', 'http://localhost:5179', 'http://localhost:5180'] }));
+app.use(cors({ origin: ['http://localhost:5173', 'http://localhost:4321', 'http://localhost:5178', 'http://localhost:5179', 'http://localhost:5180'] }));
 app.use(helmet({ crossOriginResourcePolicy: false })); // allow serving images across origins
 app.use(globalLimiter);
 app.use(express.json());

@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
@@ -101,9 +100,6 @@ export default function CompanyPage() {
 
   return (
     <>
-      <Helmet>
-        <title>Ajans Paneli | TMÖ AGENCY</title>
-      </Helmet>
       <div className="min-h-screen bg-background flex">
         <aside className="w-64 border-r bg-card flex flex-col hidden md:flex">
           <div className="p-6 border-b">
@@ -187,7 +183,7 @@ export default function CompanyPage() {
                         <DialogTitle>Yeni Manken Profili</DialogTitle>
                         <CardDescription>Lütfen mankene ait bilgileri eksiksiz doldurun.</CardDescription>
                       </DialogHeader>
-                      <form onSubmit={handleSubmit(onAddSubmit)} className="space-y-5 mt-4">
+                      <form onSubmit={handleSubmit(onAddSubmit, (errs) => { console.error(errs); toast.error("Doğrulama Hatası: Lütfen alanları kontrol edin."); })} className="space-y-5 mt-4">
                         
                         {/* Fotoğraf Alanı */}
                         <div className="p-4 bg-muted/30 border border-border/50 rounded-xl space-y-3">
@@ -203,47 +199,13 @@ export default function CompanyPage() {
                         {/* Kişisel Bilgiler */}
                         <div className="p-4 bg-muted/30 border border-border/50 rounded-xl space-y-4">
                           <h3 className="text-sm font-semibold flex items-center gap-2 text-primary">
-                            <User className="w-4 h-4" /> Kişisel Bilgiler
+                            <User className="w-4 h-4" /> Temel Bilgiler
                           </h3>
                           <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
                               <Label className={errors.firstName ? 'text-destructive' : ''}>Ad</Label>
                               <Input {...register('firstName')} placeholder="Manken Adı" className={`bg-background ${errors.firstName ? 'border-destructive' : ''}`} />
                               {errors.firstName && <p className="text-xs text-destructive">{errors.firstName.message}</p>}
-                            </div>
-                            <div className="space-y-2">
-                              <Label className={errors.lastName ? 'text-destructive' : ''}>Soyad</Label>
-                              <Input {...register('lastName')} placeholder="Manken Soyadı" className={`bg-background ${errors.lastName ? 'border-destructive' : ''}`} />
-                              {errors.lastName && <p className="text-xs text-destructive">{errors.lastName.message}</p>}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Fiziksel & Konum */}
-                        <div className="p-4 bg-muted/30 border border-border/50 rounded-xl space-y-4">
-                          <h3 className="text-sm font-semibold flex items-center gap-2 text-primary">
-                            <Ruler className="w-4 h-4" /> Fiziksel Özellikler & İletişim
-                          </h3>
-                          <div className="grid grid-cols-3 gap-4">
-                            <div className="space-y-2">
-                              <Label className={errors.height ? 'text-destructive' : ''}>Boy (cm)</Label>
-                              <Input type="number" placeholder="175" {...register('height', { valueAsNumber: true })} className={`bg-background ${errors.height ? 'border-destructive' : ''}`} />
-                            </div>
-                            <div className="space-y-2">
-                              <Label className={errors.weight ? 'text-destructive' : ''}>Kilo (kg)</Label>
-                              <Input type="number" placeholder="55" {...register('weight', { valueAsNumber: true })} className={`bg-background ${errors.weight ? 'border-destructive' : ''}`} />
-                            </div>
-                            <div className="space-y-2">
-                              <Label className={errors.age ? 'text-destructive' : ''}>Yaş</Label>
-                              <Input type="number" placeholder="22" {...register('age', { valueAsNumber: true })} className={`bg-background ${errors.age ? 'border-destructive' : ''}`} />
-                            </div>
-                          </div>
-                          
-                          <div className="grid grid-cols-2 gap-4 pt-2">
-                            <div className="space-y-2">
-                              <Label className={errors.city ? 'text-destructive' : ''}><MapPin className="w-3 h-3 inline mr-1"/>Şehir</Label>
-                              <Input {...register('city')} placeholder="İstanbul" className={`bg-background ${errors.city ? 'border-destructive' : ''}`} />
-                              {errors.city && <p className="text-xs text-destructive">{errors.city.message}</p>}
                             </div>
                             <div className="space-y-2">
                               <Label className={errors.whatsappPhone ? 'text-destructive' : ''}><Phone className="w-3 h-3 inline mr-1"/>WhatsApp No</Label>
@@ -285,9 +247,8 @@ export default function CompanyPage() {
                     <TableHeader>
                       <TableRow>
                         <TableHead className="w-[80px]">Foto</TableHead>
-                        <TableHead>Ad Soyad</TableHead>
-                        <TableHead>Şehir</TableHead>
-                        <TableHead>Fiziksel</TableHead>
+                        <TableHead>Ad</TableHead>
+                        <TableHead>WhatsApp</TableHead>
                         <TableHead className="text-right">İşlemler</TableHead>
                       </TableRow>
                     </TableHeader>
@@ -295,14 +256,14 @@ export default function CompanyPage() {
                       {loading ? (
                         Array.from({ length: 3 }).map((_, i) => (
                           <TableRow key={i}>
-                            <TableCell colSpan={5}>
+                            <TableCell colSpan={4}>
                               <div className="h-10 bg-muted animate-pulse rounded"></div>
                             </TableCell>
                           </TableRow>
                         ))
                       ) : models.length === 0 ? (
                         <TableRow>
-                          <TableCell colSpan={5} className="h-32 text-center text-muted-foreground">
+                          <TableCell colSpan={4} className="h-32 text-center text-muted-foreground">
                             Henüz hiç manken eklemediniz.
                           </TableCell>
                         </TableRow>
@@ -318,11 +279,8 @@ export default function CompanyPage() {
                                 )}
                               </div>
                             </TableCell>
-                            <TableCell className="font-medium">{model.firstName} {model.lastName}</TableCell>
-                            <TableCell>{model.city}</TableCell>
-                            <TableCell className="text-sm text-muted-foreground">
-                              {model.height}cm / {model.weight}kg / {model.age}y
-                            </TableCell>
+                            <TableCell className="font-medium">{model.firstName}</TableCell>
+                            <TableCell>{model.whatsappPhone}</TableCell>
                             <TableCell className="text-right">
                               <Button variant="ghost" size="icon" onClick={() => handleDeleteModel(model.id)}>
                                 <Trash2 className="w-4 h-4 text-destructive" />

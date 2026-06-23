@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Phone, MapPin } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { Badge } from '../../components/ui/badge';
@@ -13,7 +12,7 @@ export default function PublicPage() {
   useEffect(() => {
     const fetchModels = async () => {
       try {
-        const { data } = await api.get('/public/models');
+        const { data } = await api.get('/public/models?limit=100');
         setModels(data.data || data);
       } catch (error) {
         console.error('Mankenler yüklenemedi', error);
@@ -30,12 +29,7 @@ export default function PublicPage() {
 
   return (
     <>
-      <Helmet>
-        <title>Modellerimiz | TMÖ AGENCY</title>
-        <meta name="description" content="TMÖ Agency'nin özel ve profesyonel manken kadrosu. Şehrinizdeki en iyi yetenekleri keşfedin." />
-      </Helmet>
-      
-      <div className="min-h-screen bg-background overflow-hidden">
+      <div className="min-h-screen bg-black overflow-hidden">
         <header className="border-b border-border/50 bg-card/50 backdrop-blur-md sticky top-0 z-10">
           <div className="container mx-auto px-4 h-16 flex items-center justify-between">
             <h1 className="text-2xl font-bold tracking-tight text-primary">TMÖ <span className="text-foreground">AGENCY</span></h1>
@@ -60,52 +54,44 @@ export default function PublicPage() {
               </div>
             ) : (
               models.map((model) => (
-                <div key={model.id} className="flex flex-col md:flex-row items-center border-b border-border/30 py-2 hover:bg-muted/5 transition-colors group">
-                  {/* Left Side - Model Info */}
-                  <div className="w-full md:w-[280px] shrink-0 px-4 md:px-6 flex flex-col justify-center">
-                    <div className="flex items-center gap-3 mb-1 flex-wrap">
-                      <h3 className="text-lg font-medium">
-                        {model.firstName} {model.lastName}
-                      </h3>
-                      <Button 
-                        size="sm"
-                        className="h-7 px-2.5 text-[10px] bg-[#25D366] hover:bg-[#128C7E] text-white transition-colors gap-1.5 rounded-full" 
-                        onClick={() => handleWhatsApp(model.whatsappPhone)}
-                      >
-                        <Phone className="w-3 h-3" /> WhatsApp
-                      </Button>
-                    </div>
-                    
-                    <p className="text-xs text-muted-foreground">
-                      {model.age} Y • {model.height} cm • {model.weight} kg • {model.city}
-                    </p>
+                <div key={model.id} className="relative w-full overflow-hidden mb-4 border border-[#D4AF37]/50 rounded-lg bg-black group">
+                  
+                  {/* Absolute Name Overlay on the Left */}
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 z-20 pointer-events-none">
+                    <h3 className="text-xl md:text-2xl font-bold text-[#D4AF37] tracking-widest uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">
+                      {model.firstName}
+                    </h3>
                   </div>
 
-                  {/* Right Side - Marquee Photos */}
-                  <div className="w-full relative overflow-hidden flex-1 flex items-center">
+                  {/* Marquee Photos */}
+                  <div className="w-full relative overflow-hidden flex items-center h-[120px]">
                     {model.photos && model.photos.length > 0 ? (
-                      <div className="animate-marquee gap-3 h-[120px]">
-                        {/* Render photos 3 times to ensure a smooth infinite loop even if there are few photos */}
+                      <div className="animate-marquee gap-3 h-full py-3 pl-4 flex items-center">
+                        {/* Render photos 3 times to ensure a smooth infinite loop */}
                         {[...model.photos, ...model.photos, ...model.photos, ...model.photos].map((photo, i) => (
-                          <div key={`${photo.id}-${i}`} className="h-full w-[90px] shrink-0 rounded-sm overflow-hidden bg-muted/20">
+                          <div 
+                            key={`${photo.id}-${i}`} 
+                            className="h-[80px] w-[60px] shrink-0 rounded-md overflow-hidden border border-[#D4AF37]/30 shadow-md shadow-black cursor-pointer"
+                            onClick={() => handleWhatsApp(model.whatsappPhone)}
+                          >
                             <img 
                               src={`http://localhost:5000${photo.url}`} 
-                              alt={`${model.firstName} ${model.lastName}`}
+                              alt={`${model.firstName}`}
                               loading="lazy"
-                              className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity"
+                              className="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-110 transition-all duration-300"
                             />
                           </div>
                         ))}
                       </div>
                     ) : (
-                      <div className="w-full h-[120px] flex items-center text-xs text-muted-foreground/50">
-                        Fotoğraf yok
+                      <div className="w-full h-full flex items-center justify-center text-xs text-[#D4AF37]/50">
+                        Fotoğraf yüklenmedi
                       </div>
                     )}
                     
                     {/* Gradient Fades for left/right edges */}
-                    <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-background to-transparent z-10"></div>
-                    <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-background to-transparent z-10"></div>
+                    <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black/90 to-transparent z-10"></div>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-black/90 to-transparent z-10"></div>
                   </div>
                 </div>
               ))

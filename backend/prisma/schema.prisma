@@ -34,11 +34,6 @@ model Company {
 model Model {
   id            String   @id @default(uuid())
   firstName     String
-  lastName      String
-  height        Float
-  weight        Float
-  age           Int
-  city          String
   whatsappPhone String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt

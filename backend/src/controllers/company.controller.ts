@@ -9,7 +9,7 @@ export const createModel = async (req: AuthRequest, res: Response, next: any): P
     return;
   }
 
-  const { firstName, lastName, height, weight, age, city, whatsappPhone } = req.body;
+  const { firstName, whatsappPhone } = req.body;
   const files = req.files as Express.Multer.File[];
   const photosData = files ? files.map(file => ({ url: `/uploads/${file.filename}` })) : [];
 
@@ -30,11 +30,6 @@ export const createModel = async (req: AuthRequest, res: Response, next: any): P
         data: {
           companyId,
           firstName,
-          lastName,
-          height: Number(height),
-          weight: Number(weight),
-          age: Number(age),
-          city,
           whatsappPhone,
           photos: {
             create: photosData

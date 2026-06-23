@@ -3,8 +3,6 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const firstNames = ['Aleyna', 'Can', 'Ece', 'Burak', 'Merve', 'Kaan', 'Selin', 'Emre', 'Buse', 'Deniz', 'Gizem', 'Cem', 'Aslı', 'Oğuz', 'Zeynep'];
-const lastNames = ['Yılmaz', 'Kaya', 'Demir', 'Çelik', 'Şahin', 'Yıldız', 'Öztürk', 'Aydın', 'Özdemir', 'Arslan', 'Doğan', 'Kılıç', 'Aslan', 'Çetin'];
-const cities = ['İstanbul', 'Ankara', 'İzmir', 'Antalya', 'Bursa', 'Adana'];
 const photos = ['/uploads/model_1.png', '/uploads/model_2.png', '/uploads/model_3.png', '/uploads/model_4.png'];
 
 function randomChoice<T>(arr: T[]): T {
@@ -39,11 +37,6 @@ async function main() {
       data: {
         companyId,
         firstName: randomChoice(firstNames),
-        lastName: randomChoice(lastNames),
-        height: randomInt(160, 190),
-        weight: randomInt(50, 85),
-        age: randomInt(18, 30),
-        city: randomChoice(cities),
         whatsappPhone: `90555${randomInt(1000000, 9999999)}`,
         photos: {
           create: [

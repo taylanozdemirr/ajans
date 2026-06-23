@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
@@ -17,7 +15,6 @@ import type { LoginFormValues } from './types';
 export default function AuthPage() {
   const [loading, setLoading] = useState(false);
   const setAuth = useAuthStore((state) => state.setAuth);
-  const navigate = useNavigate();
 
   const {
     register,
@@ -35,7 +32,7 @@ export default function AuthPage() {
       
       setAuth(token, user);
       toast.success('Giriş başarılı!');
-      navigate('/dashboard');
+      window.location.href = '/dashboard';
     } catch (error: any) {
       toast.error(error.response?.data?.error || 'Giriş başarısız. Lütfen bilgilerinizi kontrol edin.');
     } finally {
@@ -45,10 +42,6 @@ export default function AuthPage() {
 
   return (
     <>
-      <Helmet>
-        <title>Giriş Yap | LUXE AGENCY</title>
-        <meta name="description" content="Luxe Agency yönetim paneline giriş yapın." />
-      </Helmet>
       <div className="min-h-screen flex items-center justify-center bg-background px-4">
         <Card className="w-full max-w-md border-border/50 shadow-2xl">
           <CardHeader className="space-y-1 text-center">

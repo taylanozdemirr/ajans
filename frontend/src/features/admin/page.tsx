@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
@@ -97,9 +96,6 @@ export default function AdminPage() {
 
   return (
     <>
-      <Helmet>
-        <title>Admin Dashboard | TMÖ AGENCY</title>
-      </Helmet>
       <div className="min-h-screen bg-background flex">
         <aside className="w-64 border-r bg-card flex flex-col hidden md:flex">
           <div className="p-6 border-b">
@@ -148,8 +144,8 @@ export default function AdminPage() {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Firma Adı</TableHead>
-                        <TableHead>Email</TableHead>
+                        <TableHead className="w-[120px] sm:w-auto">Firma Adı</TableHead>
+                        <TableHead className="w-[120px] sm:w-auto">Email</TableHead>
                         <TableHead>Kullanılan Limit</TableHead>
                         <TableHead>Toplam Limit</TableHead>
                         <TableHead className="text-right">İşlemler</TableHead>
@@ -173,8 +169,12 @@ export default function AdminPage() {
                       ) : (
                         companies.map((company) => (
                           <TableRow key={company.id}>
-                            <TableCell className="font-medium">{company.name}</TableCell>
-                            <TableCell>{company.user?.email}</TableCell>
+                            <TableCell className="font-medium max-w-[100px] sm:max-w-[200px] truncate" title={company.name}>
+                              {company.name}
+                            </TableCell>
+                            <TableCell className="max-w-[100px] sm:max-w-[200px] truncate" title={company.user?.email}>
+                              {company.user?.email}
+                            </TableCell>
                             <TableCell>
                               <Badge variant="secondary">{company.usedLimit}</Badge>
                             </TableCell>

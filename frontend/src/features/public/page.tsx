@@ -45,33 +45,22 @@ export default function PublicPage() {
       <header className="sticky top-0 z-30 border-b border-border/60 bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between px-5 md:px-8">
           <Brand href="/" size="md" />
-          <a
-            href="/login"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Ajans Girişi <ArrowUpRight className="h-3.5 w-3.5" />
-          </a>
         </div>
       </header>
 
       <main className="mx-auto max-w-6xl px-5 pb-24 md:px-8">
         {/* ── Masthead ─────────────────────────────────────────── */}
-        <section className="animate-fade-up border-b border-border/60 py-14 md:py-20">
-          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.4em] text-primary">
-            Vitrin
-          </p>
-          <h1 className="mt-4 font-display text-5xl font-medium leading-[0.95] tracking-tight text-foreground md:text-7xl">
-            Mankenlerimiz
-          </h1>
-          <p className="mt-5 max-w-[58ch] text-sm leading-relaxed text-muted-foreground md:text-base">
-            Partner ajanslarımızın vitrindeki yüzleri. Beğendiğiniz profile dokunarak
-            WhatsApp üzerinden anında iletişime geçin.
-          </p>
-          {!loading && models.length > 0 && (
-            <p className="mt-8 font-display text-sm tracking-widest text-muted-foreground">
-              {String(models.length).padStart(2, '0')} aktif profil
+        <section className="animate-fade-up border-b border-border/60 py-8 md:py-12">
+          <div className="flex items-center justify-between">
+            <p className="text-[0.8rem] font-semibold uppercase tracking-[0.4em] text-primary">
+              Vitrin
             </p>
-          )}
+            {!loading && models.length > 0 && (
+              <p className="font-display text-sm tracking-widest text-muted-foreground">
+                {String(models.length).padStart(2, '0')} aktif profil
+              </p>
+            )}
+          </div>
         </section>
 
         {/* ── Roster ───────────────────────────────────────────── */}
@@ -80,15 +69,10 @@ export default function PublicPage() {
             Array.from({ length: 3 }).map((_, i) => (
               <div
                 key={i}
-                className="grid grid-cols-1 overflow-hidden rounded-xl border border-border bg-card md:grid-cols-[minmax(220px,17rem)_1fr]"
+                className="relative overflow-hidden rounded-xl border border-border bg-card"
               >
-                <div className="space-y-3 border-b border-border p-6 md:border-b-0 md:border-r">
-                  <div className="h-3 w-8 animate-pulse rounded bg-muted" />
-                  <div className="h-7 w-40 animate-pulse rounded bg-muted" />
-                  <div className="h-3 w-24 animate-pulse rounded bg-muted" />
-                </div>
-                <div className="flex h-44 items-center gap-3 p-4">
-                  {Array.from({ length: 6 }).map((__, j) => (
+                <div className="flex h-28 items-center gap-3 p-4 md:h-36">
+                  {Array.from({ length: 8 }).map((__, j) => (
                     <div key={j} className="aspect-[3/4] h-full animate-pulse rounded-md bg-muted" />
                   ))}
                 </div>
@@ -107,34 +91,25 @@ export default function PublicPage() {
               <article
                 key={model.id}
                 style={{ animationDelay: `${Math.min(index, 8) * 70}ms` }}
-                className="group grid animate-fade-up grid-cols-1 overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-primary/40 md:grid-cols-[minmax(220px,17rem)_1fr]"
+                className="group relative animate-fade-up overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-primary/40"
               >
-                {/* Label */}
-                <div className="flex items-center justify-between gap-4 border-b border-border p-6 md:flex-col md:items-start md:justify-center md:border-b-0 md:border-r">
-                  <div className="min-w-0">
-                    <span className="font-display text-sm tracking-widest text-muted-foreground">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <h3 className="mt-1 truncate font-display text-3xl font-medium uppercase leading-none tracking-wide text-primary md:text-4xl">
-                      {model.firstName}
-                    </h3>
-                    {model.company?.name && (
-                      <p className="mt-2 truncate text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                        {model.company.name}
-                      </p>
-                    )}
+                {/* Overlay Name and Details */}
+                <div className="pointer-events-none absolute left-0 top-0 z-20 flex h-full w-48 flex-col justify-start bg-gradient-to-r from-background/90 via-background/60 to-transparent p-4 md:w-64 md:p-6">
+                  <div className="flex items-center gap-2">
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-[#D4AF37]">
+                      <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
+                    </svg>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => handleWhatsApp(model.whatsappPhone)}
-                    className="inline-flex shrink-0 items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-2 text-xs font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground md:mt-6"
-                  >
-                    <WhatsAppIcon className="h-4 w-4" /> İletişim
-                  </button>
+                  <h3 className="mt-2 font-display text-2xl font-bold uppercase tracking-wide text-primary drop-shadow-md md:text-3xl">
+                    {model.firstName}
+                  </h3>
+                  <p className="mt-1 text-xs uppercase tracking-widest text-muted-foreground font-semibold">
+                    OTEL, EV
+                  </p>
                 </div>
 
                 {/* Marquee */}
-                <div className="relative flex h-44 items-center overflow-hidden md:h-52">
+                <div className="relative flex h-28 items-center overflow-hidden md:h-36">
                   {model.photos && model.photos.length > 0 ? (
                     <button
                       type="button"

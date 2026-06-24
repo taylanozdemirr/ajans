@@ -29,7 +29,7 @@ export default function AdminPage() {
 
   const addForm = useForm<CreateCompanyFormValues>({
     resolver: zodResolver(createCompanySchema),
-    defaultValues: { name: '', email: '', password: '', totalLimit: 10 },
+    defaultValues: { name: '', email: '', password: '', totalLimit: 10, tier: 'GOLD' },
   });
 
   const editForm = useForm<UpdateLimitFormValues>({
@@ -87,7 +87,7 @@ export default function AdminPage() {
 
   const openEditModal = (company: Company) => {
     setEditCompanyId(company.id);
-    editForm.reset({ totalLimit: company.totalLimit });
+    editForm.reset({ totalLimit: company.totalLimit, tier: company.tier });
     setIsEditOpen(true);
   };
 
@@ -123,6 +123,7 @@ export default function AdminPage() {
               <TableRow className="hover:bg-transparent">
                 <TableHead className="w-[120px] sm:w-auto">Firma Adı</TableHead>
                 <TableHead className="w-[120px] sm:w-auto">E-posta</TableHead>
+                <TableHead>Üyelik Tipi</TableHead>
                 <TableHead>Kullanılan</TableHead>
                 <TableHead>Toplam</TableHead>
                 <TableHead className="text-right">İşlemler</TableHead>
@@ -139,7 +140,7 @@ export default function AdminPage() {
                 ))
               ) : companies.length === 0 ? (
                 <TableRow className="hover:bg-transparent">
-                  <TableCell colSpan={5} className="h-28 text-center text-muted-foreground">
+                  <TableCell colSpan={6} className="h-28 text-center text-muted-foreground">
                     Kayıtlı firma bulunamadı.
                   </TableCell>
                 </TableRow>
@@ -157,6 +158,11 @@ export default function AdminPage() {
                       title={company.user?.email}
                     >
                       {company.user?.email}
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={company.tier === 'MEGA' ? 'default' : 'secondary'} className={company.tier === 'MEGA' ? 'bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-black' : ''}>
+                        {company.tier}
+                      </Badge>
                     </TableCell>
                     <TableCell>
                       <Badge variant="secondary">{company.usedLimit}</Badge>
@@ -246,6 +252,19 @@ export default function AdminPage() {
                   <p className="text-sm text-destructive">{addForm.formState.errors.totalLimit.message}</p>
                 )}
               </div>
+              <div className="space-y-2">
+                <Label className={addForm.formState.errors.tier ? 'text-destructive' : ''}>Üyelik Tipi</Label>
+                <select
+                  {...addForm.register('tier')}
+                  className={`flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${addForm.formState.errors.tier ? 'border-destructive' : ''}`}
+                >
+                  <option value="GOLD">GOLD</option>
+                  <option value="MEGA">MEGA</option>
+                </select>
+                {addForm.formState.errors.tier && (
+                  <p className="text-sm text-destructive">{addForm.formState.errors.tier.message}</p>
+                )}
+              </div>
               <Button type="submit" className="h-10 w-full font-medium" disabled={addForm.formState.isSubmitting}>
                 {addForm.formState.isSubmitting ? 'Oluşturuluyor…' : 'Oluştur'}
               </Button>
@@ -269,6 +288,19 @@ export default function AdminPage() {
                 />
                 {editForm.formState.errors.totalLimit && (
                   <p className="text-sm text-destructive">{editForm.formState.errors.totalLimit.message}</p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <Label className={editForm.formState.errors.tier ? 'text-destructive' : ''}>Üyelik Tipi</Label>
+                <select
+                  {...editForm.register('tier')}
+                  className={`flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${editForm.formState.errors.tier ? 'border-destructive' : ''}`}
+                >
+                  <option value="GOLD">GOLD</option>
+                  <option value="MEGA">MEGA</option>
+                </select>
+                {editForm.formState.errors.tier && (
+                  <p className="text-sm text-destructive">{editForm.formState.errors.tier.message}</p>
                 )}
               </div>
               <Button type="submit" className="h-10 w-full font-medium" disabled={editForm.formState.isSubmitting}>

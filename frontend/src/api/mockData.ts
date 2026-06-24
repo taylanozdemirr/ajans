@@ -4,7 +4,8 @@ export const mockModels = [
     "firstName": "ELİF 1",
     "whatsappPhone": "905550000001",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "MEGA"
     },
     "photos": [
       {
@@ -18,7 +19,8 @@ export const mockModels = [
     "firstName": "AYLİN 2",
     "whatsappPhone": "905550000002",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "MEGA"
     },
     "photos": [
       {
@@ -32,7 +34,8 @@ export const mockModels = [
     "firstName": "BENGÜ 3",
     "whatsappPhone": "905550000003",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "MEGA"
     },
     "photos": [
       {
@@ -46,7 +49,8 @@ export const mockModels = [
     "firstName": "DEFNE 4",
     "whatsappPhone": "905550000004",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "MEGA"
     },
     "photos": [
       {
@@ -60,7 +64,8 @@ export const mockModels = [
     "firstName": "MELİS 5",
     "whatsappPhone": "905550000005",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "MEGA"
     },
     "photos": [
       {
@@ -74,7 +79,8 @@ export const mockModels = [
     "firstName": "CANSIN 6",
     "whatsappPhone": "905550000006",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -88,7 +94,8 @@ export const mockModels = [
     "firstName": "SU 7",
     "whatsappPhone": "905550000007",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -102,7 +109,8 @@ export const mockModels = [
     "firstName": "CANSIN 8",
     "whatsappPhone": "905550000008",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -116,7 +124,8 @@ export const mockModels = [
     "firstName": "CANSIN 9",
     "whatsappPhone": "905550000009",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -130,7 +139,8 @@ export const mockModels = [
     "firstName": "AYŞE 10",
     "whatsappPhone": "905550000010",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -144,7 +154,8 @@ export const mockModels = [
     "firstName": "AYŞE 11",
     "whatsappPhone": "905550000011",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -158,7 +169,8 @@ export const mockModels = [
     "firstName": "DEFNE 12",
     "whatsappPhone": "905550000012",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -172,7 +184,8 @@ export const mockModels = [
     "firstName": "MERVE 13",
     "whatsappPhone": "905550000013",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -186,7 +199,8 @@ export const mockModels = [
     "firstName": "ASYA 14",
     "whatsappPhone": "905550000014",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -200,7 +214,8 @@ export const mockModels = [
     "firstName": "BÜŞRA 15",
     "whatsappPhone": "905550000015",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -214,7 +229,8 @@ export const mockModels = [
     "firstName": "ASYA 16",
     "whatsappPhone": "905550000016",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -228,7 +244,8 @@ export const mockModels = [
     "firstName": "ASYA 17",
     "whatsappPhone": "905550000017",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -242,7 +259,8 @@ export const mockModels = [
     "firstName": "ASYA 18",
     "whatsappPhone": "905550000018",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -256,7 +274,8 @@ export const mockModels = [
     "firstName": "AYLİN 19",
     "whatsappPhone": "905550000019",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -270,7 +289,8 @@ export const mockModels = [
     "firstName": "BÜŞRA 20",
     "whatsappPhone": "905550000020",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -284,7 +304,8 @@ export const mockModels = [
     "firstName": "BURCU 21",
     "whatsappPhone": "905550000021",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -298,7 +319,8 @@ export const mockModels = [
     "firstName": "SEDA 22",
     "whatsappPhone": "905550000022",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -312,7 +334,8 @@ export const mockModels = [
     "firstName": "ELİF 23",
     "whatsappPhone": "905550000023",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -326,7 +349,8 @@ export const mockModels = [
     "firstName": "GİZEM 24",
     "whatsappPhone": "905550000024",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -340,7 +364,8 @@ export const mockModels = [
     "firstName": "GİZEM 25",
     "whatsappPhone": "905550000025",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -354,7 +379,8 @@ export const mockModels = [
     "firstName": "MELİS 26",
     "whatsappPhone": "905550000026",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -368,7 +394,8 @@ export const mockModels = [
     "firstName": "AYŞE 27",
     "whatsappPhone": "905550000027",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -382,7 +409,8 @@ export const mockModels = [
     "firstName": "GİZEM 28",
     "whatsappPhone": "905550000028",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -396,7 +424,8 @@ export const mockModels = [
     "firstName": "ASYA 29",
     "whatsappPhone": "905550000029",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -410,7 +439,8 @@ export const mockModels = [
     "firstName": "DEFNE 30",
     "whatsappPhone": "905550000030",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -424,7 +454,8 @@ export const mockModels = [
     "firstName": "SEDA 31",
     "whatsappPhone": "905550000031",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -438,7 +469,8 @@ export const mockModels = [
     "firstName": "MELİS 32",
     "whatsappPhone": "905550000032",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -452,7 +484,8 @@ export const mockModels = [
     "firstName": "ECE 33",
     "whatsappPhone": "905550000033",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -466,7 +499,8 @@ export const mockModels = [
     "firstName": "GİZEM 34",
     "whatsappPhone": "905550000034",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -480,7 +514,8 @@ export const mockModels = [
     "firstName": "CEREN 35",
     "whatsappPhone": "905550000035",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -494,7 +529,8 @@ export const mockModels = [
     "firstName": "HAYAL 36",
     "whatsappPhone": "905550000036",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -508,7 +544,8 @@ export const mockModels = [
     "firstName": "CEMRE 37",
     "whatsappPhone": "905550000037",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -522,7 +559,8 @@ export const mockModels = [
     "firstName": "ASYA 38",
     "whatsappPhone": "905550000038",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -536,7 +574,8 @@ export const mockModels = [
     "firstName": "BURCU 39",
     "whatsappPhone": "905550000039",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -550,7 +589,8 @@ export const mockModels = [
     "firstName": "SU 40",
     "whatsappPhone": "905550000040",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -564,7 +604,8 @@ export const mockModels = [
     "firstName": "DEFNE 41",
     "whatsappPhone": "905550000041",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -578,7 +619,8 @@ export const mockModels = [
     "firstName": "AYŞE 42",
     "whatsappPhone": "905550000042",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -592,7 +634,8 @@ export const mockModels = [
     "firstName": "CEREN 43",
     "whatsappPhone": "905550000043",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -606,7 +649,8 @@ export const mockModels = [
     "firstName": "BURCU 44",
     "whatsappPhone": "905550000044",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -620,7 +664,8 @@ export const mockModels = [
     "firstName": "SU 45",
     "whatsappPhone": "905550000045",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -634,7 +679,8 @@ export const mockModels = [
     "firstName": "SEDA 46",
     "whatsappPhone": "905550000046",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -648,7 +694,8 @@ export const mockModels = [
     "firstName": "CEMRE 47",
     "whatsappPhone": "905550000047",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -662,7 +709,8 @@ export const mockModels = [
     "firstName": "MELİS 48",
     "whatsappPhone": "905550000048",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -676,7 +724,8 @@ export const mockModels = [
     "firstName": "CEMRE 49",
     "whatsappPhone": "905550000049",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -690,7 +739,8 @@ export const mockModels = [
     "firstName": "HAYAL 50",
     "whatsappPhone": "905550000050",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -704,7 +754,8 @@ export const mockModels = [
     "firstName": "ECE 51",
     "whatsappPhone": "905550000051",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -718,7 +769,8 @@ export const mockModels = [
     "firstName": "CEREN 52",
     "whatsappPhone": "905550000052",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -732,7 +784,8 @@ export const mockModels = [
     "firstName": "HAYAL 53",
     "whatsappPhone": "905550000053",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -746,7 +799,8 @@ export const mockModels = [
     "firstName": "FATMA 54",
     "whatsappPhone": "905550000054",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -760,7 +814,8 @@ export const mockModels = [
     "firstName": "CEMRE 55",
     "whatsappPhone": "905550000055",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -774,7 +829,8 @@ export const mockModels = [
     "firstName": "CEREN 56",
     "whatsappPhone": "905550000056",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -788,7 +844,8 @@ export const mockModels = [
     "firstName": "CANSIN 57",
     "whatsappPhone": "905550000057",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -802,7 +859,8 @@ export const mockModels = [
     "firstName": "ECE 58",
     "whatsappPhone": "905550000058",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -816,7 +874,8 @@ export const mockModels = [
     "firstName": "ASYA 59",
     "whatsappPhone": "905550000059",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {
@@ -830,7 +889,8 @@ export const mockModels = [
     "firstName": "DEFNE 60",
     "whatsappPhone": "905550000060",
     "company": {
-      "name": "VIP Agency"
+      "name": "VIP Agency",
+      "tier": "GOLD"
     },
     "photos": [
       {

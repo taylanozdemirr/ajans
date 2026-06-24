@@ -10,6 +10,7 @@ interface User {
     name: string;
     totalLimit: number;
     usedLimit: number;
+    tier: 'MEGA' | 'GOLD';
   };
 }
 

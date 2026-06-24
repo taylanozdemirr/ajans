@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import { prisma } from '../config/db';
 
 export const createCompany = async (req: Request, res: Response, next: any): Promise<void> => {
-  const { email, password, name, totalLimit } = req.body;
+  const { email, password, name, totalLimit, tier } = req.body;
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -16,7 +16,8 @@ export const createCompany = async (req: Request, res: Response, next: any): Pro
         company: {
           create: {
             name,
-            totalLimit: Number(totalLimit) || 0
+            totalLimit: Number(totalLimit) || 0,
+            tier: tier || 'GOLD'
           }
         }
       },
@@ -39,7 +40,8 @@ export const getCompanies = async (req: Request, res: Response, next: any): Prom
       prisma.company.findMany({
         skip,
         take: limit,
-        include: { user: { select: { email: true } } }
+        include: { user: { select: { email: true } } },
+        orderBy: { createdAt: 'desc' }
       }),
       prisma.company.count()
     ]);
@@ -60,12 +62,15 @@ export const getCompanies = async (req: Request, res: Response, next: any): Prom
 
 export const updateCompanyLimit = async (req: Request, res: Response, next: any): Promise<void> => {
   const id = req.params.id as string;
-  const { totalLimit } = req.body;
+  const { totalLimit, tier } = req.body;
 
   try {
     const company = await prisma.company.update({
       where: { id },
-      data: { totalLimit: Number(totalLimit) }
+      data: { 
+        ...(totalLimit !== undefined && { totalLimit: Number(totalLimit) }),
+        ...(tier && { tier })
+      }
     });
     res.json(company);
   } catch (error) {

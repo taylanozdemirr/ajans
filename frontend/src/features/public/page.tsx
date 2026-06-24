@@ -39,6 +39,9 @@ export default function PublicPage() {
     window.open(`https://wa.me/${phone.replace(/\D/g, '')}`, '_blank', 'noopener');
   };
 
+  const megaModels = models.filter((m) => m.company?.tier === 'MEGA');
+  const goldModels = models.filter((m) => m.company?.tier === 'GOLD' || !m.company?.tier);
+
   return (
     <div className="min-h-screen bg-background">
       {/* ── Header ─────────────────────────────────────────────── */}
@@ -135,8 +138,12 @@ export default function PublicPage() {
                 görünecekler.
               </p>
             </div>
+          ) : megaModels.length === 0 ? (
+            <div className="rounded-xl border border-dashed border-border py-12 text-center">
+              <p className="font-display text-lg text-foreground">Mega Vitrin şu an boş</p>
+            </div>
           ) : (
-            models.slice(0, 5).map((model, index) => (
+            megaModels.map((model, index) => (
               <article
                 key={`mega-${model.id}`}
                 style={{ animationDelay: `${Math.min(index, 8) * 70}ms` }}
@@ -200,7 +207,7 @@ export default function PublicPage() {
         </section>
 
         {/* ── Gold Vitrin Banner ─────────────────────────────────────────── */}
-        {!loading && models.length > 5 && (
+        {!loading && goldModels.length > 0 && (
           <>
             <section className="animate-fade-up py-8 mt-4 md:mt-8">
               <div className="flex items-center justify-center border-y-2 border-[#D4AF37] bg-[#1e0024] py-3 shadow-xl">
@@ -211,12 +218,12 @@ export default function PublicPage() {
             </section>
 
             {/* ── Gold Vitrin Grid ─────────────────────────────────────────── */}
-            <section className="flex flex-wrap items-center justify-center gap-4 md:gap-5 pb-12">
-              {models.slice(5).map((model, index) => (
+            <section className="grid grid-cols-4 gap-2 md:gap-5 pb-12">
+              {goldModels.map((model, index) => (
                 <article
                   key={`gold-${model.id}`}
                   style={{ animationDelay: `${Math.min(index, 20) * 30}ms` }}
-                  className="group relative animate-fade-up overflow-hidden rounded-md border border-border/70 bg-card shadow-lg shadow-black/40 transition-colors hover:border-[#D4AF37]/50 aspect-[3/4] h-28 md:h-36 shrink-0"
+                  className="group relative animate-fade-up overflow-hidden rounded-md border border-border/70 bg-card shadow-lg shadow-black/40 transition-colors hover:border-[#D4AF37]/50 aspect-[3/4] w-full max-w-[84px] md:max-w-[108px] mx-auto"
                 >
                   <button
                     type="button"

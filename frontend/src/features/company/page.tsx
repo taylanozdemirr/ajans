@@ -58,6 +58,11 @@ export default function CompanyPage() {
       return;
     }
 
+    if (user.company.tier === 'GOLD' && fileInputRef.current?.files && fileInputRef.current.files.length > 1) {
+      toast.error('GOLD üyeliğiniz gereği sadece 1 fotoğraf yükleyebilirsiniz.');
+      return;
+    }
+
     try {
       const formData = new FormData();
       Object.entries(data).forEach(([key, value]) => {
@@ -172,8 +177,16 @@ export default function CompanyPage() {
                       <ImagePlus className="h-4 w-4 text-primary" /> Medya Yükleme
                     </h3>
                     <div className="space-y-2">
-                      <Label>Profil fotoğrafları (birden fazla seçebilirsiniz)</Label>
-                      <Input type="file" accept="image/*" multiple ref={fileInputRef} className="cursor-pointer" />
+                      <Label>
+                        Profil fotoğrafları {user?.company?.tier === 'GOLD' ? '(Sadece 1 fotoğraf)' : '(Birden fazla seçebilirsiniz)'}
+                      </Label>
+                      <Input 
+                        type="file" 
+                        accept="image/*" 
+                        multiple={user?.company?.tier !== 'GOLD'} 
+                        ref={fileInputRef} 
+                        className="cursor-pointer" 
+                      />
                     </div>
                   </div>
 

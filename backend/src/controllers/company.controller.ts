@@ -11,7 +11,7 @@ export const createModel = async (req: AuthRequest, res: Response, next: any): P
 
   const { firstName, whatsappPhone } = req.body;
   const files = req.files as Express.Multer.File[];
-  const photosData = files ? files.map(file => ({ url: `/uploads/${file.filename}` })) : [];
+  let photosData = files ? files.map(file => ({ url: `/uploads/${file.filename}` })) : [];
 
   try {
     const company = await prisma.company.findUnique({ where: { id: companyId } });
@@ -23,6 +23,11 @@ export const createModel = async (req: AuthRequest, res: Response, next: any): P
     if (company.usedLimit >= company.totalLimit) {
       res.status(403).json({ error: 'İlan limitiniz dolmuştur.' });
       return;
+    }
+
+    if (company.tier === 'GOLD' && photosData.length > 1) {
+      // Gold tier can only upload 1 photo. Slice to keep only the first if they somehow bypassed frontend.
+      photosData = [photosData[0]];
     }
 
     const model = await prisma.$transaction(async (tx) => {

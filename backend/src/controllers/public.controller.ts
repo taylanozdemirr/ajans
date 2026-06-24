@@ -9,7 +9,7 @@ export const getAllModels = async (req: Request, res: Response, next: any): Prom
 
     const allModels = await prisma.model.findMany({
       include: {
-        company: { select: { id: true, name: true } },
+        company: { select: { id: true, name: true, tier: true } },
         photos: true
       }
     });

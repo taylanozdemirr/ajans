@@ -22,6 +22,7 @@ model Company {
   name       String
   totalLimit Int      @default(0)
   usedLimit  Int      @default(0)
+  tier       String   @default("GOLD")
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 

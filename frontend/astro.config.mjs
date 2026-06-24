@@ -4,8 +4,7 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://taylanozdemirr.github.io',
-  base: '/ajans/',
+  site: 'https://ajans-d8e.pages.dev',
   integrations: [
     react(),
     tailwind({

@@ -45,21 +45,70 @@ export default function PublicPage() {
       <header className="sticky top-0 z-30 border-b border-border/60 bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between px-5 md:px-8">
           <Brand href="/" size="md" />
+          <button
+            type="button"
+            onClick={() => handleWhatsApp('905555555555')}
+            className="flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] px-5 py-2 text-xs md:text-sm font-bold text-black shadow-lg shadow-[#D4AF37]/20 transition-transform hover:scale-105 active:scale-95"
+          >
+            <span>İLAN VER</span>
+            <ArrowUpRight className="h-4 w-4" />
+          </button>
         </div>
       </header>
 
       <main className="mx-auto max-w-6xl px-5 pb-24 md:px-8">
-        {/* ── Masthead ─────────────────────────────────────────── */}
-        <section className="animate-fade-up border-b border-border/60 py-8 md:py-12">
-          <div className="flex items-center justify-between">
-            <p className="text-[0.8rem] font-semibold uppercase tracking-[0.4em] text-primary">
-              Vitrin
-            </p>
-            {!loading && models.length > 0 && (
-              <p className="font-display text-sm tracking-widest text-muted-foreground">
-                {String(models.length).padStart(2, '0')} aktif profil
-              </p>
-            )}
+        {/* ── Mega Vitrin Banner ─────────────────────────────────────────── */}
+        <section className="animate-fade-up py-4 md:py-6 flex flex-col gap-2">
+          
+          {/* Üst İlan Verme Banner'ı */}
+          <a 
+            href={`https://wa.me/905555555555`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex items-center justify-center gap-3 bg-black py-2 md:py-3 transition-colors hover:bg-black/80"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-[#D4AF37] drop-shadow-md">
+              <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
+            </svg>
+            <h2 className="font-display text-base font-bold text-[#D4AF37] md:text-xl">
+              Vitrin ilanı vermek icin tıklayınız
+            </h2>
+            <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-[#D4AF37] drop-shadow-md">
+              <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
+            </svg>
+          </a>
+
+          {/* Ana Mega Vitrin */}
+          <div className="relative flex items-center justify-between overflow-hidden border-y-2 border-red-600 bg-[#1e0024] px-4 py-3 shadow-2xl md:px-8 md:py-4">
+            
+            {/* Sol Siluet (Placeholder) */}
+            <div className="flex h-10 w-10 items-center justify-center text-[#D4AF37] md:h-16 md:w-16">
+              {/* Not: Müşterinin tam siluet görseli buraya gelecek */}
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-full w-full opacity-90 drop-shadow-md">
+                <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
+              </svg>
+            </div>
+
+            {/* Orta Metin */}
+            <div className="flex items-center gap-2 md:gap-4">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-[#D4AF37] drop-shadow-md md:h-8 md:w-8">
+                <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
+              </svg>
+              <h1 className="font-display text-xl font-black italic tracking-widest text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] md:text-4xl">
+                MEGA VİTRİN
+              </h1>
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-[#D4AF37] drop-shadow-md md:h-8 md:w-8">
+                <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
+              </svg>
+            </div>
+
+            {/* Sağ Siluet (Placeholder - Aynalanmış) */}
+            <div className="flex h-10 w-10 scale-x-[-1] items-center justify-center text-[#D4AF37] md:h-16 md:w-16">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-full w-full opacity-90 drop-shadow-md">
+                <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
+              </svg>
+            </div>
+            
           </div>
         </section>
 

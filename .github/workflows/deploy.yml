@@ -27,31 +27,35 @@ jobs:
 
 
 
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-        working-directory: ./frontend
-
-      - name: Build Astro
-        run: npm run build > build.log 2>&1 || (cat build.log && exit 1)
-        working-directory: ./frontend
-        env:
-          VITE_USE_MOCK: 'true'
-
-      - name: Push log to ci-logs branch on failure
-        if: failure()
+      - name: Run Build and Capture Logs
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          git checkout -b ci-logs
-          cp frontend/build.log ./build.log
-          git add build.log
-          git commit -m "chore: add build log"
-          git push -u origin ci-logs --force
+          set +e
+          echo "Starting build process..." > full_build.log
+          echo "=== NPM INSTALL ===" >> full_build.log
+          cd frontend
+          npm install --legacy-peer-deps >> ../full_build.log 2>&1
+          echo "=== NPM BUILD ===" >> ../full_build.log
+          VITE_USE_MOCK=true npm run build >> ../full_build.log 2>&1
+          echo "=== LS DIST ===" >> ../full_build.log
+          ls -la dist >> ../full_build.log 2>&1
+          cd ..
+          echo "=== DONE ===" >> full_build.log
+        continue-on-error: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: './frontend/dist'
+
+      - name: Push log to ci-logs branch
+        if: always()
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git checkout -b ci-logs-debug || git checkout ci-logs-debug
+          git add full_build.log
+          git commit -m "chore: add full build log" || true
+          git push -u origin ci-logs-debug --force
 
   deploy:
     environment:

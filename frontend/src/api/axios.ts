@@ -1,11 +1,16 @@
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
+import { mockModels } from './mockData';
 
 const api = axios.create({
   baseURL: 'http://localhost:5000/api',
 });
 
 api.interceptors.request.use((config) => {
+  if (import.meta.env.VITE_USE_MOCK === 'true') {
+    // If we're mocking, we can optionally bypass or just add a marker
+    config.headers['X-Mock-Request'] = 'true';
+  }
   const token = useAuthStore.getState().token;
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -16,6 +21,14 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Check if we need to return mock data instead of erroring out when backend is unreachable
+    if (import.meta.env.VITE_USE_MOCK === 'true') {
+      const url = error.config?.url;
+      if (url && url.includes('/public/models')) {
+        return Promise.resolve({ data: mockModels, status: 200, statusText: 'OK', headers: {}, config: error.config });
+      }
+    }
+
     if (error.response?.status === 401) {
       useAuthStore.getState().logout();
     }

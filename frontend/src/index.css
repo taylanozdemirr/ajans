@@ -2,50 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  LUXE AGENCY — design tokens
+  Single source of truth. OKLCH component triplets (L C H) consumed via Tailwind
+  as `oklch(var(--token) / <alpha-value>)` so /opacity utilities work.
+  Brand hue ≈ 84 (antique champagne gold). Neutrals are tinted toward it.
+  :root = light (panels when toggled). .dark = dark (default + always on the vitrin).
+*/
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 43 100% 50%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
+    --background: 0.978 0.005 84;
+    --foreground: 0.22 0.014 84;
+
+    --card: 0.995 0.0025 84;
+    --card-foreground: 0.22 0.014 84;
+
+    --popover: 0.995 0.0025 84;
+    --popover-foreground: 0.22 0.014 84;
+
+    --primary: 0.74 0.118 82;
+    --primary-foreground: 0.21 0.02 84;
+
+    --secondary: 0.95 0.006 84;
+    --secondary-foreground: 0.28 0.014 84;
+
+    --muted: 0.955 0.006 84;
+    --muted-foreground: 0.52 0.012 84;
+
+    --accent: 0.945 0.009 84;
+    --accent-foreground: 0.26 0.014 84;
+
+    --destructive: 0.57 0.19 25;
+    --destructive-foreground: 0.99 0.004 85;
+
+    --border: 0.9 0.008 84;
+    --input: 0.9 0.008 84;
+    --ring: 0.74 0.118 82;
+
+    --radius: 0.625rem;
   }
 
   .dark {
-    --background: 0 0% 5%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 43 100% 50%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 43 100% 50%;
+    --background: 0.165 0.006 84;
+    --foreground: 0.95 0.006 84;
+
+    --card: 0.205 0.008 84;
+    --card-foreground: 0.95 0.006 84;
+
+    --popover: 0.195 0.008 84;
+    --popover-foreground: 0.95 0.006 84;
+
+    --primary: 0.82 0.124 85;
+    --primary-foreground: 0.18 0.022 84;
+
+    --secondary: 0.255 0.008 84;
+    --secondary-foreground: 0.95 0.006 84;
+
+    --muted: 0.25 0.008 84;
+    --muted-foreground: 0.72 0.013 84;
+
+    --accent: 0.3 0.012 84;
+    --accent-foreground: 0.96 0.006 84;
+
+    --destructive: 0.6 0.16 25;
+    --destructive-foreground: 0.97 0.01 85;
+
+    --border: 0.3 0.012 84;
+    --input: 0.33 0.014 84;
+    --ring: 0.82 0.124 85;
   }
 }
 
@@ -53,22 +78,56 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
   body {
-    @apply antialiased bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "kern";
+  }
+  /* Bodoni hairlines look intentional only with optical sizing + ligatures */
+  .font-display {
+    font-optical-sizing: auto;
+    font-feature-settings: "kern", "liga", "dlig";
   }
 }
 
+/* ── Vitrin marquee ─────────────────────────────────────────────── */
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 15s linear infinite;
+  animation: marquee 42s linear infinite;
+  will-change: transform;
 }
 
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+/* Fine film-grain keeps large dark fields from looking flat/cheap */
+.bg-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .animate-marquee {
+    transform: none;
+  }
 }

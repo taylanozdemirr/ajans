@@ -32,10 +32,21 @@ jobs:
         working-directory: ./frontend
 
       - name: Build Astro
-        run: npm run build
+        run: npm run build > build.log 2>&1 || (cat build.log && exit 1)
         working-directory: ./frontend
         env:
           VITE_USE_MOCK: 'true'
+
+      - name: Push log to ci-logs branch on failure
+        if: failure()
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git checkout -b ci-logs
+          cp frontend/build.log ./build.log
+          git add build.log
+          git commit -m "chore: add build log"
+          git push -u origin ci-logs --force
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

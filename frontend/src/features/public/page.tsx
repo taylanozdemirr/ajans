@@ -112,8 +112,8 @@ export default function PublicPage() {
           </div>
         </section>
 
-        {/* ── Roster ───────────────────────────────────────────── */}
-        <section className="flex flex-col gap-5 pt-10">
+        {/* ── Mega Vitrin Roster ───────────────────────────────────────────── */}
+        <section className="flex flex-col gap-5 pt-8">
           {loading ? (
             Array.from({ length: 3 }).map((_, i) => (
               <div
@@ -136,9 +136,9 @@ export default function PublicPage() {
               </p>
             </div>
           ) : (
-            models.map((model, index) => (
+            models.slice(0, 5).map((model, index) => (
               <article
-                key={model.id}
+                key={`mega-${model.id}`}
                 style={{ animationDelay: `${Math.min(index, 8) * 70}ms` }}
                 className="group relative animate-fade-up overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-primary/40"
               >
@@ -198,6 +198,67 @@ export default function PublicPage() {
             ))
           )}
         </section>
+
+        {/* ── Gold Vitrin Banner ─────────────────────────────────────────── */}
+        {!loading && models.length > 5 && (
+          <>
+            <section className="animate-fade-up py-8 mt-4 md:mt-8">
+              <div className="flex items-center justify-center border-y-2 border-[#D4AF37] bg-[#1e0024] py-3 shadow-xl">
+                <h2 className="font-display text-2xl font-black uppercase tracking-widest text-[#D4AF37] drop-shadow-md md:text-3xl">
+                  GOLD VİTRİN
+                </h2>
+              </div>
+            </section>
+
+            {/* ── Gold Vitrin Grid ─────────────────────────────────────────── */}
+            <section className="flex flex-wrap items-center justify-center gap-4 md:gap-5 pb-12">
+              {models.slice(5).map((model, index) => (
+                <article
+                  key={`gold-${model.id}`}
+                  style={{ animationDelay: `${Math.min(index, 20) * 30}ms` }}
+                  className="group relative animate-fade-up overflow-hidden rounded-md border border-border/70 bg-card shadow-lg shadow-black/40 transition-colors hover:border-[#D4AF37]/50 aspect-[3/4] h-28 md:h-36 shrink-0"
+                >
+                  <button
+                    type="button"
+                    onClick={() => handleWhatsApp(model.whatsappPhone)}
+                    aria-label={`${model.firstName} ile iletişime geç`}
+                    className="relative flex h-full w-full flex-col items-center justify-center"
+                  >
+                    {model.photos && model.photos.length > 0 ? (
+                      <img
+                        src={mediaUrl(model.photos[0].url)}
+                        alt={model.firstName}
+                        loading="lazy"
+                        className="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-muted text-[10px] uppercase tracking-widest text-muted-foreground">
+                        Foto Yok
+                      </div>
+                    )}
+                    
+                    {/* Alt Bilgi Overlay */}
+                    <div className="absolute bottom-0 left-0 flex w-full flex-col items-start justify-end bg-gradient-to-t from-black/90 via-black/40 to-transparent p-2 md:p-3">
+                      <h3 className="font-display text-xs md:text-sm font-bold text-[#D4AF37] drop-shadow-md">
+                        {model.firstName}
+                      </h3>
+                      <p className="text-[8px] md:text-[10px] uppercase tracking-widest text-white/80 font-semibold">
+                        OTEL, EV
+                      </p>
+                    </div>
+                    
+                    {/* Sol Üst Kral Tacı */}
+                    <div className="absolute left-1 top-1 md:left-2 md:top-2 z-20">
+                      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 md:h-5 md:w-5 text-[#D4AF37] drop-shadow-md">
+                        <path d="M2 20h20v2H2v-2zm1.6-1.8L2 7l5 3 5-8 5 8 5-3-1.6 11.2H3.6z" />
+                      </svg>
+                    </div>
+                  </button>
+                </article>
+              ))}
+            </section>
+          </>
+        )}
       </main>
 
       {/* ── Footer ───────────────────────────────────────────── */}

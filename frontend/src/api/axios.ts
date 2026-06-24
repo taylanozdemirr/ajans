@@ -20,12 +20,10 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Cloudflare Pages veya lokalde backend yoksa fake json döndür
-    if (import.meta.env.VITE_USE_MOCK === 'true') {
-      const url = error.config?.url;
-      if (url && url.includes('/public/models')) {
-        return Promise.resolve({ data: { data: mockModels }, status: 200, statusText: 'OK', headers: {}, config: error.config });
-      }
+    // Backend ulaşılamazsa (Cloudflare Pages vb.) direkt fake json döndür
+    const url = error.config?.url;
+    if (url && url.includes('/public/models')) {
+      return Promise.resolve({ data: { data: mockModels }, status: 200, statusText: 'OK', headers: {}, config: error.config });
     }
 
     if (error.response?.status === 401) {

@@ -191,74 +191,85 @@ export default function PublicPage() {
         {/* ── Gold Vitrin Banner ─────────────────────────────────────────── */}
         {!loading && goldModels.length > 0 && (
           <>
-            <section className="animate-fade-up py-1 mt-1">
-              <div className="flex items-center justify-center border-y-2 border-[#D4AF37] bg-[#1e0024] py-2 shadow-xl">
-                <h2 className="font-display text-lg font-black uppercase tracking-widest text-[#D4AF37] drop-shadow-md md:text-xl">
-                  GOLD VİTRİN
-                </h2>
+            <section className="animate-fade-up pt-1 pb-1 flex flex-col gap-2 mt-4">
+              {/* Ana Gold Vitrin */}
+              <div className="relative flex items-center justify-between overflow-hidden border-y-2 border-[#D4AF37] bg-[#1e0024] px-4 py-3 shadow-2xl md:px-8 md:py-4">
+                
+                {/* Sol Siluet (Placeholder) */}
+                <div className="flex h-10 w-10 items-center justify-center text-[#D4AF37] md:h-16 md:w-16">
+                  {/* Not: Müşterinin tam siluet görseli buraya gelecek */}
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-full w-full opacity-90 drop-shadow-md">
+                    <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
+                  </svg>
+                </div>
+
+                {/* Orta Metin */}
+                <div className="flex items-center gap-2 md:gap-4">
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 text-[#D4AF37] drop-shadow-md md:h-6 md:w-6">
+                    <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
+                  </svg>
+                  <h2 className="font-display text-lg font-black italic tracking-widest text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] md:text-2xl">
+                    GOLD VİTRİN
+                  </h2>
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 text-[#D4AF37] drop-shadow-md md:h-6 md:w-6">
+                    <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
+                  </svg>
+                </div>
+
+                {/* Sağ Siluet (Placeholder - Aynalanmış) */}
+                <div className="flex h-10 w-10 scale-x-[-1] items-center justify-center text-[#D4AF37] md:h-16 md:w-16">
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-full w-full opacity-90 drop-shadow-md">
+                    <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
+                  </svg>
+                </div>
+                
               </div>
             </section>
 
-            {/* ── Gold Vitrin Roster ─────────────────────────────────────────── */}
-            <section className="flex flex-col gap-2 pt-0 pb-12">
+            {/* ── Gold Vitrin Grid ─────────────────────────────────────────── */}
+            <section className="grid grid-cols-4 gap-1 md:gap-3 pt-0 pb-12">
               {goldModels.map((model, index) => (
                 <article
                   key={`gold-${model.id}`}
-                  style={{ animationDelay: `${Math.min(index, 8) * 70}ms` }}
-                  className="group relative animate-fade-up overflow-hidden rounded-xl border border-[#D4AF37]/30 bg-card transition-colors hover:border-[#D4AF37]"
+                  style={{ animationDelay: `${Math.min(index, 20) * 30}ms` }}
+                  className="group relative animate-fade-up overflow-hidden rounded-md border border-border/70 bg-card shadow-lg shadow-black/40 transition-colors hover:border-[#D4AF37]/50 aspect-[3/4] w-full max-w-[84px] md:max-w-[108px] mx-auto"
                 >
-                  {/* Overlay Name and Details */}
-                  <div className="pointer-events-none absolute left-0 top-0 z-20 flex h-full w-48 flex-col justify-start bg-gradient-to-r from-background/90 via-background/60 to-transparent p-4 md:w-64 md:p-6">
-                    <div className="flex items-center gap-2">
-                      <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-[#D4AF37]">
-                        <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
-                      </svg>
-                    </div>
-                    <h3 className="mt-2 font-display text-2xl font-bold uppercase tracking-wide text-[#D4AF37] drop-shadow-md md:text-3xl">
-                      {model.firstName}
-                    </h3>
-                    <p className="mt-1 text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-                      OTEL, EV
-                    </p>
-                  </div>
-
-                  {/* Marquee */}
-                  <div className="relative flex h-28 items-center overflow-hidden md:h-36">
+                  <button
+                    type="button"
+                    onClick={() => handleWhatsApp(model.whatsappPhone)}
+                    aria-label={`${model.firstName} ile iletişime geç`}
+                    className="relative flex h-full w-full flex-col items-center justify-center"
+                  >
                     {model.photos && model.photos.length > 0 ? (
-                      <button
-                        type="button"
-                        onClick={() => handleWhatsApp(model.whatsappPhone)}
-                        aria-label={`${model.firstName} ile iletişime geç`}
-                        className="flex h-full w-full cursor-pointer items-center"
-                      >
-                        <div className="animate-marquee h-full items-center gap-1 py-1 pl-1">
-                          {[...model.photos, ...model.photos, ...model.photos, ...model.photos].map(
-                            (photo, i) => (
-                              <div
-                                key={`${photo.id}-${i}`}
-                                className="aspect-[3/4] h-full shrink-0 overflow-hidden rounded-md border border-[#D4AF37]/50 bg-muted shadow-lg shadow-black/40"
-                              >
-                                <img
-                                  src={mediaUrl(photo.url)}
-                                  alt={model.firstName}
-                                  loading="lazy"
-                                  className="h-full w-full object-cover opacity-90 transition duration-500 group-hover:opacity-100"
-                                />
-                              </div>
-                            ),
-                          )}
-                        </div>
-                      </button>
+                      <img
+                        src={mediaUrl(model.photos[0].url)}
+                        alt={model.firstName}
+                        loading="lazy"
+                        className="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
+                      />
                     ) : (
-                      <div className="flex h-full w-full items-center justify-center text-xs uppercase tracking-widest text-muted-foreground">
-                        Fotoğraf yüklenmedi
+                      <div className="flex h-full w-full items-center justify-center bg-muted text-[10px] uppercase tracking-widest text-muted-foreground">
+                        Foto Yok
                       </div>
                     )}
-
-                    {/* Edge fades */}
-                    <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-card to-transparent" />
-                    <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-card to-transparent" />
-                  </div>
+                    
+                    {/* Alt Bilgi Overlay */}
+                    <div className="absolute bottom-0 left-0 flex w-full flex-col items-start justify-end bg-gradient-to-t from-black/90 via-black/40 to-transparent p-2 md:p-3">
+                      <h3 className="font-display text-xs md:text-sm font-bold text-[#D4AF37] drop-shadow-md">
+                        {model.firstName}
+                      </h3>
+                      <p className="text-[8px] md:text-[10px] uppercase tracking-widest text-white/80 font-semibold">
+                        OTEL, EV
+                      </p>
+                    </div>
+                    
+                    {/* Sol Üst Kral Tacı */}
+                    <div className="absolute left-1 top-1 md:left-2 md:top-2 z-20">
+                      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 md:h-5 md:w-5 text-[#D4AF37] drop-shadow-md">
+                        <path d="M2 20h20v2H2v-2zm1.6-1.8L2 7l5 3 5-8 5 8 5-3-1.6 11.2H3.6z" />
+                      </svg>
+                    </div>
+                  </button>
                 </article>
               ))}
             </section>

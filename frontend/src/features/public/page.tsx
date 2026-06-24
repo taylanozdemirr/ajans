@@ -62,24 +62,6 @@ export default function PublicPage() {
       <main className="mx-auto max-w-6xl px-5 pb-24 md:px-8">
         {/* ── Mega Vitrin Banner ─────────────────────────────────────────── */}
         <section className="animate-fade-up py-4 md:py-6 flex flex-col gap-2">
-          
-          {/* Üst İlan Verme Banner'ı */}
-          <a 
-            href={`https://wa.me/905555555555`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative flex items-center justify-center gap-3 bg-black py-2 md:py-3 transition-colors hover:bg-black/80"
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-[#D4AF37] drop-shadow-md">
-              <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
-            </svg>
-            <h2 className="font-display text-base font-bold text-[#D4AF37] md:text-xl">
-              Vitrin ilanı vermek icin tıklayınız
-            </h2>
-            <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-[#D4AF37] drop-shadow-md">
-              <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
-            </svg>
-          </a>
 
           {/* Ana Mega Vitrin */}
           <div className="relative flex items-center justify-between overflow-hidden border-y-2 border-red-600 bg-[#1e0024] px-4 py-3 shadow-2xl md:px-8 md:py-4">
@@ -94,13 +76,13 @@ export default function PublicPage() {
 
             {/* Orta Metin */}
             <div className="flex items-center gap-2 md:gap-4">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-[#D4AF37] drop-shadow-md md:h-8 md:w-8">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 text-[#D4AF37] drop-shadow-md md:h-6 md:w-6">
                 <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
               </svg>
-              <h1 className="font-display text-xl font-black italic tracking-widest text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] md:text-4xl">
+              <h1 className="font-display text-lg font-black italic tracking-widest text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] md:text-2xl">
                 MEGA VİTRİN
               </h1>
-              <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-[#D4AF37] drop-shadow-md md:h-8 md:w-8">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 text-[#D4AF37] drop-shadow-md md:h-6 md:w-6">
                 <path d="M12 2L15 9L22 9L16.5 14L18.5 22L12 17.5L5.5 22L7.5 14L2 9L9 9L12 2Z" />
               </svg>
             </div>
@@ -116,7 +98,7 @@ export default function PublicPage() {
         </section>
 
         {/* ── Mega Vitrin Roster ───────────────────────────────────────────── */}
-        <section className="flex flex-col gap-5 pt-8">
+        <section className="flex flex-col gap-2 pt-2">
           {loading ? (
             Array.from({ length: 3 }).map((_, i) => (
               <div
@@ -173,7 +155,7 @@ export default function PublicPage() {
                       aria-label={`${model.firstName} ile iletişime geç`}
                       className="flex h-full w-full cursor-pointer items-center"
                     >
-                      <div className="animate-marquee h-full items-center gap-3 py-4 pl-4">
+                      <div className="animate-marquee h-full items-center gap-1 py-1 pl-1">
                         {[...model.photos, ...model.photos, ...model.photos, ...model.photos].map(
                           (photo, i) => (
                             <div
@@ -209,16 +191,16 @@ export default function PublicPage() {
         {/* ── Gold Vitrin Banner ─────────────────────────────────────────── */}
         {!loading && goldModels.length > 0 && (
           <>
-            <section className="animate-fade-up py-8 mt-4 md:mt-8">
-              <div className="flex items-center justify-center border-y-2 border-[#D4AF37] bg-[#1e0024] py-3 shadow-xl">
-                <h2 className="font-display text-2xl font-black uppercase tracking-widest text-[#D4AF37] drop-shadow-md md:text-3xl">
+            <section className="animate-fade-up py-2 mt-2 md:mt-4">
+              <div className="flex items-center justify-center border-y-2 border-[#D4AF37] bg-[#1e0024] py-2 shadow-xl">
+                <h2 className="font-display text-lg font-black uppercase tracking-widest text-[#D4AF37] drop-shadow-md md:text-xl">
                   GOLD VİTRİN
                 </h2>
               </div>
             </section>
 
             {/* ── Gold Vitrin Grid ─────────────────────────────────────────── */}
-            <section className="grid grid-cols-4 gap-2 md:gap-5 pb-12">
+            <section className="grid grid-cols-4 gap-1 md:gap-3 pt-2 pb-12">
               {goldModels.map((model, index) => (
                 <article
                   key={`gold-${model.id}`}

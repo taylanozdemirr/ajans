@@ -162,7 +162,6 @@ export default function PublicPage() {
                               <img
                                 src={mediaUrl(photo.url)}
                                 alt={model.firstName}
-                                loading="lazy"
                                 className="h-full w-full object-cover opacity-90 transition duration-500 group-hover:opacity-100"
                               />
                             </div>
@@ -241,7 +240,6 @@ export default function PublicPage() {
                       <img
                         src={mediaUrl(model.photos[0].url)}
                         alt={model.firstName}
-                        loading="lazy"
                         className="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
                       />
                     ) : (

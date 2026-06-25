@@ -141,9 +141,6 @@ export default function PublicPage() {
                   <h3 className="mt-2 font-display text-2xl font-bold uppercase tracking-wide text-primary drop-shadow-md md:text-3xl">
                     {model.firstName}
                   </h3>
-                  <p className="mt-1 text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-                    OTEL, EV
-                  </p>
                 </div>
 
                 {/* Marquee */}
@@ -258,9 +255,6 @@ export default function PublicPage() {
                       <h3 className="font-display text-xs md:text-sm font-bold text-[#D4AF37] drop-shadow-md">
                         {model.firstName}
                       </h3>
-                      <p className="text-[8px] md:text-[10px] uppercase tracking-widest text-white/80 font-semibold">
-                        OTEL, EV
-                      </p>
                     </div>
                     
                     {/* Sol Üst Kral Tacı */}

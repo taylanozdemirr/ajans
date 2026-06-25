@@ -153,10 +153,10 @@ export default function PublicPage() {
                       className="flex h-full w-full cursor-pointer items-center"
                     >
                       <div className="animate-marquee h-full items-center gap-1 py-1 pl-1">
-                        {[...model.photos, ...model.photos, ...model.photos, ...model.photos].map(
-                          (photo, i) => (
+                        {Array(20).fill(model.photos).flat().map(
+                          (photo: any, i: number) => (
                             <div
-                              key={`${photo.id}-${i}`}
+                              key={`${photo?.id || 'photo'}-${i}`}
                               className="aspect-[3/4] h-full shrink-0 overflow-hidden rounded-md border border-border/70 bg-muted shadow-lg shadow-black/40"
                             >
                               <img

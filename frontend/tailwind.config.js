@@ -22,6 +22,9 @@ export default {
       },
     },
     extend: {
+      screens: {
+        xs: "480px",
+      },
       fontFamily: {
         sans: ['"Hanken Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         display: ['"Bodoni Moda"', 'ui-serif', 'Georgia', 'Cambria', 'serif'],

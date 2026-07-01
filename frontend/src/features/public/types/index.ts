@@ -3,8 +3,9 @@ export interface PublicModel {
   firstName: string;
   whatsappPhone: string;
   photos: { id: string; url: string }[];
-  company: {
+  company?: {
     id: string;
     name: string;
+    tier?: 'MEGA' | 'GOLD';
   };
 }

@@ -1,0 +1,49 @@
+Starting build process...
+=== NPM INSTALL ===
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: '@astrojs/react@6.0.0',
+npm warn EBADENGINE   required: { node: '>=22.12.0' },
+npm warn EBADENGINE   current: { node: 'v20.20.2', npm: '10.8.2' }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'astro@7.0.5',
+npm warn EBADENGINE   required: { node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0' },
+npm warn EBADENGINE   current: { node: 'v20.20.2', npm: '10.8.2' }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: '@astrojs/compiler-rs@0.3.0',
+npm warn EBADENGINE   required: { node: '>=22.12.0' },
+npm warn EBADENGINE   current: { node: 'v20.20.2', npm: '10.8.2' }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: '@astrojs/prism@4.0.2',
+npm warn EBADENGINE   required: { node: '>=22.12.0' },
+npm warn EBADENGINE   current: { node: 'v20.20.2', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+added 824 packages, and audited 825 packages in 38s
+
+230 packages are looking for funding
+  run `npm fund` for details
+
+5 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+=== NPM BUILD ===
+
+> frontend@0.0.0 build
+> astro build
+
+Node.js v20.20.2 is not supported by Astro!
+Please upgrade Node.js to a supported version: ">=22.12.0"
+
+GitHub Actions CI Environment Detected!
+Additional steps may be needed to set your Node.js version:
+Documentation: https://docs.astro.build/en/guides/deploy/
+
+=== LS DIST ===
+ls: cannot access 'dist': No such file or directory
+=== DONE ===

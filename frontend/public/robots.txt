@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Panel ve giriş sayfaları indekslenmez
+Disallow: /login
+Disallow: /dashboard
+
+Sitemap: https://ajans-d8e.pages.dev/sitemap.xml

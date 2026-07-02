@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#faf9f6"/>
+  <rect x="0" y="0" width="1200" height="10" fill="#c79a3a"/>
+  <g transform="translate(100, 250)">
+    <rect x="0" y="-52" width="4" height="120" fill="#c79a3a"/>
+    <text x="30" y="0" font-family="Georgia, 'Times New Roman', serif" font-size="96" font-weight="700" fill="#1a1a1a" letter-spacing="6">İSTANBUL</text>
+    <text x="34" y="70" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="600" fill="#c79a3a" letter-spacing="14">MASAJ</text>
+  </g>
+  <text x="130" y="430" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#555555">İstanbul’un 39 ilçesinde profesyonel masör ve masaj hizmeti</text>
+  <text x="130" y="480" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#888888">Klasik · Spor · Aromaterapi · Medikal Masaj</text>
+</svg>

@@ -1,0 +1,13 @@
+---
+import { Brand } from '@/components/brand';
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-border/60">
+	<div class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-5 py-10 md:flex-row md:items-center md:px-8">
+		<Brand href="/" size="sm" />
+		<p class="text-xs text-muted-foreground">
+			© {year} İSTANBUL MASAJ · Tüm hakları saklıdır.
+		</p>
+	</div>
+</footer>

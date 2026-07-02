@@ -69,7 +69,7 @@ export default function AuthPage() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="ornek@ajans.com"
+                  placeholder="ornek@istanbulmasaj.com"
                   autoComplete="email"
                   {...register('email')}
                   className={errors.email ? 'border-destructive focus-visible:ring-destructive' : ''}

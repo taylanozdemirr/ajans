@@ -17,7 +17,7 @@ const SIZES: Record<BrandSize, { luxe: string; agency: string; rule: string; gap
 };
 
 /**
- * LUXE AGENCY wordmark — the single canonical brand lockup. Bodoni display caps
+ * İSTANBUL MASAJ wordmark — the single canonical brand lockup. Bodoni display caps
  * paired with a letter-spaced grotesque sub-label and a hairline gold rule.
  */
 export function Brand({ tag, size = 'md', className, href }: BrandProps) {
@@ -31,7 +31,7 @@ export function Brand({ tag, size = 'md', className, href }: BrandProps) {
       />
       <span className="flex flex-row items-baseline gap-2 leading-none">
         <span className={cn('font-display font-bold tracking-widest text-foreground', s.luxe)}>
-          LUXE
+          İSTANBUL
         </span>
         <span
           className={cn(
@@ -39,7 +39,7 @@ export function Brand({ tag, size = 'md', className, href }: BrandProps) {
             s.agency,
           )}
         >
-          AGENCY
+          MASAJ
         </span>
       </span>
       {tag && (

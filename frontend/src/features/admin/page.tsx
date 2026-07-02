@@ -103,7 +103,7 @@ export default function AdminPage() {
           <div>
             <h1 className="font-display text-3xl font-medium tracking-tight md:text-4xl">Firma Yönetimi</h1>
             <p className="mt-2 text-sm text-muted-foreground">
-              Sisteme kayıtlı tüm ajans ve firmaları buradan yönetin.
+              Sisteme kayıtlı tüm işletme ve masörleri buradan yönetin.
             </p>
           </div>
           <Button className="gap-2" onClick={() => setIsAddOpen(true)}>

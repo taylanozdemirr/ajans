@@ -41,7 +41,7 @@ export default function CompanyPage() {
       const { data } = await api.get('/company/models');
       setModels(data.data || data);
     } catch (error) {
-      toast.error('Mankenler getirilirken hata oluştu.');
+      toast.error('Masörler getirilirken hata oluştu.');
     } finally {
       setLoading(false);
     }
@@ -79,7 +79,7 @@ export default function CompanyPage() {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
-      toast.success('Manken başarıyla eklendi.');
+      toast.success('Masör başarıyla eklendi.');
       setIsAddOpen(false);
       reset();
       if (fileInputRef.current) fileInputRef.current.value = '';
@@ -87,20 +87,20 @@ export default function CompanyPage() {
       updateCompanyLimit(user.company.usedLimit + 1);
       fetchModels();
     } catch (error: any) {
-      toast.error(error.response?.data?.error || 'Manken eklenirken hata oluştu.');
+      toast.error(error.response?.data?.error || 'Masör eklenirken hata oluştu.');
     }
   };
 
   const handleDeleteModel = async (id: string) => {
     try {
       await api.delete(`/company/models/${id}`);
-      toast.success('Manken silindi.');
+      toast.success('Masör silindi.');
       if (user?.company) {
         updateCompanyLimit(Math.max(0, user.company.usedLimit - 1));
       }
       fetchModels();
     } catch (error) {
-      toast.error('Manken silinirken hata oluştu.');
+      toast.error('Masör silinirken hata oluştu.');
     }
   };
 
@@ -112,16 +112,16 @@ export default function CompanyPage() {
 
   return (
     <PanelLayout
-      tag="Ajans"
-      nav={[{ label: 'Mankenlerim', icon: Users, active: true }]}
-      user={{ name: user?.company?.name || 'Ajans', email: user?.email, role: 'Ajans' }}
+      tag="İşletme"
+      nav={[{ label: 'Masörlerim', icon: Users, active: true }]}
+      user={{ name: user?.company?.name || 'İşletme', email: user?.email, role: 'İşletme' }}
       onLogout={logout}
     >
       <div className="space-y-8">
         <header className="animate-fade-up">
-          <h1 className="font-display text-3xl font-medium tracking-tight md:text-4xl">Ajans Paneli</h1>
+          <h1 className="font-display text-3xl font-medium tracking-tight md:text-4xl">İşletme Paneli</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Manken ilanlarınızı yönetin ve ilan hakkınızı takip edin.
+            Masör ilanlarınızı yönetin ve ilan hakkınızı takip edin.
           </p>
         </header>
 
@@ -152,7 +152,7 @@ export default function CompanyPage() {
         <section className="animate-fade-up overflow-hidden rounded-xl border border-border bg-card [animation-delay:120ms]">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-6 py-4">
             <h2 className="flex items-center gap-2 text-base font-semibold">
-              <Users className="h-4 w-4 text-muted-foreground" /> Yayındaki Mankenlerim
+              <Users className="h-4 w-4 text-muted-foreground" /> Yayındaki Masörlerim
             </h2>
 
             <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
@@ -164,9 +164,9 @@ export default function CompanyPage() {
               <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
                 <DialogHeader>
                   <DialogTitle className="font-display text-xl font-medium tracking-tight">
-                    Yeni Manken Profili
+                    Yeni Masör Profili
                   </DialogTitle>
-                  <DialogDescription>Lütfen mankene ait bilgileri eksiksiz doldurun.</DialogDescription>
+                  <DialogDescription>Lütfen masöre ait bilgileri eksiksiz doldurun.</DialogDescription>
                 </DialogHeader>
                 <form
                   onSubmit={handleSubmit(onAddSubmit, () => toast.error('Lütfen alanları kontrol edin.'))}
@@ -199,7 +199,7 @@ export default function CompanyPage() {
                         <Label className={errors.firstName ? 'text-destructive' : ''}>Ad</Label>
                         <Input
                           {...register('firstName')}
-                          placeholder="Manken adı"
+                          placeholder="Masör adı"
                           className={errors.firstName ? 'border-destructive' : ''}
                         />
                         {errors.firstName && <p className="text-xs text-destructive">{errors.firstName.message}</p>}
@@ -237,7 +237,7 @@ export default function CompanyPage() {
             <div className="flex items-center gap-3 border-b border-destructive/25 bg-destructive/10 px-6 py-3 text-destructive">
               <AlertCircle className="h-5 w-5 shrink-0" />
               <p className="text-sm font-medium">
-                İlan ekleme limitinize ulaştınız. Daha fazla manken eklemek için yeni limit talep edin.
+                İlan ekleme limitinize ulaştınız. Daha fazla masör eklemek için yeni limit talep edin.
               </p>
             </div>
           )}
@@ -263,7 +263,7 @@ export default function CompanyPage() {
               ) : models.length === 0 ? (
                 <TableRow className="hover:bg-transparent">
                   <TableCell colSpan={4} className="h-36 text-center">
-                    <p className="font-display text-lg text-foreground">Henüz manken eklemediniz</p>
+                    <p className="font-display text-lg text-foreground">Henüz masör eklemediniz</p>
                     <p className="mt-1 text-sm text-muted-foreground">
                       “İlan Ekle” ile ilk profilinizi yayınlayın.
                     </p>
@@ -287,7 +287,7 @@ export default function CompanyPage() {
                     <TableCell className="text-muted-foreground">{model.whatsappPhone}</TableCell>
                     <TableCell className="text-right">
                       <ConfirmDialog
-                        title="Mankeni sil"
+                        title="Masörü sil"
                         description={`“${model.firstName}” profili kalıcı olarak silinecek. Bu işlem geri alınamaz.`}
                         confirmLabel="Sil"
                         destructive

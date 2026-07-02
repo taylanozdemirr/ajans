@@ -1,0 +1,172 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '@/components/site-header.astro';
+import SiteFooter from '@/components/site-footer.astro';
+import DistrictNav from '@/components/district-nav.astro';
+import VitrinRoster from '@/features/public/VitrinRoster';
+import { DISTRICTS, type District } from '@/data/districts';
+
+export function getStaticPaths() {
+	return DISTRICTS.map((d) => ({ params: { district: d.slug }, props: { d } }));
+}
+
+interface Props {
+	d: District;
+}
+const { d } = Astro.props;
+const origin = (Astro.site ?? new URL(Astro.url.origin)).origin;
+const pageUrl = `${origin}/${d.slug}`;
+
+const description = `${d.name} masaj — ${d.name} ve çevresinde profesyonel masör ve masaj hizmeti. Klasik, spor, aromaterapi ve medikal masaj için size en yakın masöre WhatsApp ile ulaşın.`;
+const keywords = `${d.name.toLocaleLowerCase('tr')} masaj, ${d.name.toLocaleLowerCase('tr')} masör, ${d.name.toLocaleLowerCase('tr')} masaj salonu, istanbul masaj, profesyonel masaj, spor masajı, aromaterapi masaj`;
+
+const HIZMETLER = [
+	{ ad: 'Klasik (İsveç) Masaj', aciklama: 'Tüm vücutta gevşeme ve dolaşımı destekleyen temel rahatlama masajı.' },
+	{ ad: 'Spor Masajı', aciklama: 'Kas yorgunluğu ve tutulmalara yönelik, aktif yaşayanlar için derin çalışma.' },
+	{ ad: 'Aromaterapi Masajı', aciklama: 'Doğal yağlarla stres ve gerginliği azaltmaya odaklı dinlendirici masaj.' },
+	{ ad: 'Medikal / Bölgesel Masaj', aciklama: 'Boyun, sırt ve bel gibi bölgelere yönelik hedefli, terapötik dokunuş.' },
+];
+
+const SSS = [
+	{
+		q: `${d.name}’de masaj hizmeti nasıl alınır?`,
+		a: `${d.name} sayfasındaki masör profillerinden birini seçip WhatsApp butonuna dokunarak doğrudan iletişime geçebilir, uygun gün ve saat için randevu oluşturabilirsiniz.`,
+	},
+	{
+		q: `${d.name}’de hangi masaj türleri sunuluyor?`,
+		a: 'Klasik (İsveç) masaj, spor masajı, aromaterapi ve medikal/bölgesel masaj başta olmak üzere farklı tekniklerde profesyonel hizmet sunulmaktadır.',
+	},
+	{
+		q: `${d.name} masaj fiyatları ne kadar?`,
+		a: 'Fiyatlar masöre, masaj türüne ve seans süresine göre değişir. Güncel fiyat bilgisi için ilgili masörle WhatsApp üzerinden görüşebilirsiniz.',
+	},
+	{
+		q: `${d.name} çevresinde hangi bölgelere hizmet veriliyor?`,
+		a: `${d.mahalleler.join(', ')} başta olmak üzere ${d.name} ve yakın çevresine masaj hizmeti verilmektedir.`,
+	},
+];
+
+const jsonld = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: `${origin}/` },
+			{ '@type': 'ListItem', position: 2, name: `${d.name} Masaj`, item: pageUrl },
+		],
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': ['LocalBusiness', 'HealthAndBeautyBusiness'],
+		name: `İSTANBUL MASAJ — ${d.name}`,
+		url: pageUrl,
+		description,
+		image: `${origin}/og.svg`,
+		areaServed: { '@type': 'AdministrativeArea', name: `${d.name}, İstanbul` },
+		address: {
+			'@type': 'PostalAddress',
+			addressLocality: d.name,
+			addressRegion: 'İstanbul',
+			addressCountry: 'TR',
+		},
+		knowsAbout: HIZMETLER.map((h) => h.ad),
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: SSS.map((s) => ({
+			'@type': 'Question',
+			name: s.q,
+			acceptedAnswer: { '@type': 'Answer', text: s.a },
+		})),
+	},
+];
+---
+
+<Layout
+	title={`${d.name} Masaj | Profesyonel Masör ve Masaj Hizmeti — İSTANBUL MASAJ`}
+	description={description}
+	keywords={keywords}
+	jsonld={jsonld}
+>
+	<div class="min-h-screen bg-background">
+		<SiteHeader />
+
+		<main class="mx-auto max-w-6xl px-5 pb-24 md:px-8">
+			{/* Breadcrumb */}
+			<nav aria-label="Breadcrumb" class="pt-6 text-xs text-muted-foreground">
+				<a href="/" class="transition-colors hover:text-primary">Ana Sayfa</a>
+				<span aria-hidden class="px-1.5">/</span>
+				<span class="text-foreground">{d.name} Masaj</span>
+			</nav>
+
+			{/* Hero (sunucu-render, benzersiz içerik) */}
+			<section class="pb-2 pt-6 md:pt-10">
+				<p class="font-sans text-[0.65rem] uppercase tracking-[0.32em] text-muted-foreground md:text-xs">
+					{d.yaka} Yakası · İstanbul
+				</p>
+				<h1 class="mt-3 max-w-3xl font-display text-3xl leading-[1.08] text-foreground md:text-5xl">
+					{d.name} Masaj — <span class="text-primary">Profesyonel Masör Hizmeti</span>
+				</h1>
+				<p class="mt-5 max-w-3xl text-sm leading-relaxed text-muted-foreground md:text-base">
+					{d.intro}
+				</p>
+			</section>
+
+			{/* Canlı masör listesi */}
+			<VitrinRoster client:only="react" />
+
+			{/* Hizmetler */}
+			<div class="flex items-center gap-4 pb-3 pt-12">
+				<span aria-hidden class="h-px flex-1 bg-border"></span>
+				<h2 class="font-display text-lg uppercase tracking-[0.2em] text-foreground md:text-2xl">
+					{d.name} Masaj Hizmetleri
+				</h2>
+				<span aria-hidden class="h-px flex-1 bg-border"></span>
+			</div>
+			<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+				{HIZMETLER.map((h) => (
+					<div class="rounded-xl border border-border bg-card p-5">
+						<h3 class="font-display text-lg text-foreground">{h.ad}</h3>
+						<p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">{h.aciklama}</p>
+					</div>
+				))}
+			</div>
+
+			{/* Bölge / mahalleler */}
+			<section class="mt-8 rounded-xl border border-border bg-card p-6">
+				<h2 class="font-display text-xl text-foreground">{d.name} ve Çevresinde Masaj</h2>
+				<p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+					{d.name} genelinde
+					<span class="text-foreground">{d.mahalleler.join(', ')}</span>
+					başta olmak üzere geniş bir bölgeye profesyonel masaj hizmeti sunulmaktadır.
+					Size en yakın masörü seçip WhatsApp üzerinden hızlıca randevu oluşturabilirsiniz.
+				</p>
+			</section>
+
+			{/* SSS */}
+			<div class="flex items-center gap-4 pb-3 pt-12">
+				<span aria-hidden class="h-px flex-1 bg-border"></span>
+				<h2 class="font-display text-lg uppercase tracking-[0.2em] text-foreground md:text-2xl">
+					Sıkça Sorulan Sorular
+				</h2>
+				<span aria-hidden class="h-px flex-1 bg-border"></span>
+			</div>
+			<div class="space-y-2.5">
+				{SSS.map((s) => (
+					<details class="group rounded-lg border border-border bg-card px-5 py-4">
+						<summary class="cursor-pointer list-none font-medium text-foreground marker:hidden">
+							{s.q}
+						</summary>
+						<p class="mt-2 text-sm leading-relaxed text-muted-foreground">{s.a}</p>
+					</details>
+				))}
+			</div>
+
+			{/* Diğer ilçeler */}
+			<DistrictNav exclude={d.slug} title="Diğer İlçelerde Masaj" />
+		</main>
+
+		<SiteFooter />
+	</div>
+</Layout>

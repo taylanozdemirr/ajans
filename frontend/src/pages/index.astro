@@ -1,11 +1,69 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import PublicPage from '../features/public/page';
+import SiteHeader from '@/components/site-header.astro';
+import SiteFooter from '@/components/site-footer.astro';
+import DistrictNav from '@/components/district-nav.astro';
+import VitrinRoster from '@/features/public/VitrinRoster';
+
+const origin = (Astro.site ?? new URL(Astro.url.origin)).origin;
+
+const description =
+	'İstanbul masaj hizmeti — İstanbul’un 39 ilçesinde profesyonel masör ve masaj rehberi. Klasik, spor, aromaterapi ve medikal masaj için size en yakın masöre WhatsApp ile ulaşın.';
+
+const jsonld = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: 'İSTANBUL MASAJ',
+		url: `${origin}/`,
+		inLanguage: 'tr-TR',
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': ['LocalBusiness', 'HealthAndBeautyBusiness'],
+		name: 'İSTANBUL MASAJ',
+		url: `${origin}/`,
+		description,
+		image: `${origin}/og.svg`,
+		areaServed: { '@type': 'City', name: 'İstanbul' },
+		address: {
+			'@type': 'PostalAddress',
+			addressLocality: 'İstanbul',
+			addressRegion: 'İstanbul',
+			addressCountry: 'TR',
+		},
+		knowsAbout: ['klasik masaj', 'spor masajı', 'aromaterapi masaj', 'medikal masaj', 'refleksoloji'],
+	},
+];
 ---
 
 <Layout
-	title="Luxe Agency | Türkiye'nin En İyi Manken & Model Ajansı"
-	description="Luxe Agency, Türkiye'nin en seçkin ve profesyonel manken, model ve cast ajansı. Etkinlikleriniz, defileleriniz ve projeleriniz için en iyi yüzleri keşfedin."
+	title="İstanbul Masaj | Profesyonel Masör ve Masaj Hizmeti"
+	description={description}
+	jsonld={jsonld}
 >
-	<PublicPage client:only="react" />
+	<div class="min-h-screen bg-background">
+		<SiteHeader />
+
+		<main class="mx-auto max-w-6xl px-5 pb-24 md:px-8">
+			{/* ── Masthead (sunucu-render, crawlable) ─────────────────── */}
+			<section class="pb-2 pt-10 text-center md:pt-16">
+				<p class="font-sans text-[0.65rem] uppercase tracking-[0.32em] text-muted-foreground md:text-xs">
+					İstanbul · Profesyonel Masaj &amp; Masör Rehberi
+				</p>
+				<h1 class="mx-auto mt-4 max-w-2xl font-display text-3xl leading-[1.05] text-foreground md:text-6xl">
+					İstanbul’da profesyonel masaj,
+					<span class="text-primary"> tek adreste.</span>
+				</h1>
+			</section>
+
+			{/* Canlı masör listesi — tek interaktif ada */}
+			<VitrinRoster client:only="react" />
+
+			{/* İlçe iç linkleri — yerel SEO */}
+			<DistrictNav />
+		</main>
+
+		<SiteFooter />
+	</div>
 </Layout>

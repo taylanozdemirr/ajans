@@ -5,12 +5,29 @@ import { Toaster } from '../components/toaster';
 interface Props {
 	title: string;
 	description?: string;
+	/** Sayfaya özel anahtar kelimeler; verilmezse genel masaj seti kullanılır. */
+	keywords?: string;
+	/** Panel/giriş gibi indekslenmemesi gereken sayfalar için. */
+	noindex?: boolean;
+	/** OG/Twitter görsel yolu (site köküne göre). */
+	image?: string;
+	/** Sayfaya özel JSON-LD yapılandırılmış veri (nesne veya dizi). */
+	jsonld?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
 	title,
-	description = 'LUXE AGENCY — seçkin manken ajansı.',
+	description = 'İstanbul masaj hizmeti — İstanbul’un 39 ilçesinde profesyonel masör ve masaj rehberi. Size en yakın masöre ulaşın, WhatsApp ile iletişime geçin.',
+	keywords = 'istanbul masaj, masaj, masör, masaj salonu, profesyonel masaj, spa masaj, klasik masaj, spor masajı, aromaterapi masaj, medikal masaj',
+	noindex = false,
+	image = '/og.svg',
+	jsonld,
 } = Astro.props;
+
+// Yapılandırılmış `site` üzerinden temiz mutlak URL'ler (query string'siz canonical).
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const imageURL = new URL(image, Astro.site ?? Astro.url).href;
+const jsonldList = jsonld ? (Array.isArray(jsonld) ? jsonld : [jsonld]) : [];
 ---
 
 <!doctype html>
@@ -19,27 +36,39 @@ const {
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="/favicon.svg" />
+		<meta name="theme-color" content="#ffffff" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
-		<meta name="keywords" content="manken, model, ajans, cast, profesyonel model ajansı, oyunculuk, etkinlik, defile, luxe agency" />
-		<meta name="robots" content="index, follow" />
-		<meta name="author" content="Luxe Agency" />
-		<link rel="canonical" href={Astro.url.href} />
+		<meta name="keywords" content={keywords} />
+		<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+		<meta name="author" content="İSTANBUL MASAJ" />
+		<meta name="geo.region" content="TR-34" />
+		<meta name="geo.placename" content="İstanbul" />
+		<link rel="canonical" href={canonicalURL} />
 
 		{/* Open Graph (Sosyal Medya) */}
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content={Astro.url.href} />
+		<meta property="og:locale" content="tr_TR" />
+		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content="/favicon.svg" />
-		<meta property="og:site_name" content="Luxe Agency" />
+		<meta property="og:image" content={imageURL} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:site_name" content="İSTANBUL MASAJ" />
 
 		{/* Twitter Cards */}
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:url" content={Astro.url.href} />
+		<meta name="twitter:url" content={canonicalURL} />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content="/favicon.svg" />
+		<meta name="twitter:image" content={imageURL} />
+
+		{/* JSON-LD yapılandırılmış veri */}
+		{jsonldList.map((data) => (
+			<script type="application/ld+json" set:html={JSON.stringify(data)} />
+		))}
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "predev": "prisma generate",
     "dev": "nodemon src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js"
+    "build": "prisma generate && tsc",
+    "start": "node dist/server.js",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",

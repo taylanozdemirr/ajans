@@ -5,19 +5,16 @@ import { Toaster } from '../components/toaster';
 interface Props {
 	title: string;
 	description?: string;
-	/** The public vitrin is always dark regardless of stored preference. */
-	forceDark?: boolean;
 }
 
 const {
 	title,
 	description = 'LUXE AGENCY — seçkin manken ajansı.',
-	forceDark = false,
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="tr" class="dark">
+<html lang="tr">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -51,17 +48,19 @@ const {
 			rel="stylesheet"
 		/>
 
-		{/* Apply theme before paint to avoid a flash of the wrong palette */}
-		<script is:inline define:vars={{ forceDark }}>
+		{/* Apply theme before paint to avoid a flash of the wrong palette.
+		    Default is light (the brand's white editorial theme); users opt into
+		    dark via the header toggle, persisted under `luxe-theme`. */}
+		<script is:inline>
 			(function () {
 				try {
 					var stored = localStorage.getItem('luxe-theme');
-					var theme = forceDark ? 'dark' : stored === 'light' ? 'light' : 'dark';
+					var theme = stored === 'dark' ? 'dark' : 'light';
 					var root = document.documentElement;
 					root.classList.toggle('dark', theme === 'dark');
 					root.style.colorScheme = theme;
 				} catch (e) {
-					document.documentElement.classList.add('dark');
+					/* storage unavailable — default light applies */
 				}
 			})();
 		</script>

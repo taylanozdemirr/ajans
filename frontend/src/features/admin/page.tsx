@@ -160,7 +160,7 @@ export default function AdminPage() {
                       {company.user?.email}
                     </TableCell>
                     <TableCell>
-                      <Badge variant={company.tier === 'MEGA' ? 'default' : 'secondary'} className={company.tier === 'MEGA' ? 'bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-black' : ''}>
+                      <Badge variant={company.tier === 'MEGA' ? 'default' : 'secondary'} className={company.tier === 'MEGA' ? 'bg-primary text-primary-foreground hover:bg-primary/90' : ''}>
                         {company.tier}
                       </Badge>
                     </TableCell>
